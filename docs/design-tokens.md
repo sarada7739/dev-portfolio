@@ -54,9 +54,10 @@
 - ナビ高さ: 64px。セクションラベルと見出しの間: 24px。見出しとサブコピーの間: 16px。ボタンまで: 32px
 - 制作物グリッド: 4列（lg 1024px 以上）→ 2列（sm 640px 以上）→ 1列。カード間隔 20px。サムネイル比率 5:3
 - HOW I WORK のカード: 縦積み、間隔 16px、内側余白 20px 24px、左のマーカー 12px 円、右端ラベルは caption
+- 写真比率 4:3（Nisoine の写真）
 
 ## 角丸・影・罫線
-- 角丸: card 8px（制作物カード・サムネイル）/ panel 10px（HOW I WORK カード）/ pill 9999px（ボタン・タグ）
+- 角丸: card 8px（制作物カード・サムネイル）/ panel 10px（HOW I WORK カード）/ pill 9999px（ボタン・タグ）/ phone 40px（Nisoine のスマホ枠）
 - 影: card `0 1px 2px rgb(26 29 35 / 0.04), 0 4px 16px rgb(26 29 35 / 0.04)`。紺地では影なし
 - 罫線: すべて 1px。色は line / navy-border / blush-edge / coral-line
 

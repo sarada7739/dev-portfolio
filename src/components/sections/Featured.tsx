@@ -34,7 +34,7 @@ export default function Featured() {
           </div>
         </div>
         <div className="lg:relative">
-          <div className="relative h-64 w-full overflow-hidden rounded-card sm:h-72 lg:h-80">
+          <div className="relative aspect-photo w-full overflow-hidden rounded-card">
             <Image
               src={featured.photo}
               alt="海辺で夕日を眺めるふたり"
@@ -45,8 +45,8 @@ export default function Featured() {
           </div>
           {/* スマホ枠は phone-frame.png を使わず bg-button の CSS 枠で描く */}
           <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:absolute lg:right-0 lg:bottom-0 lg:mx-0 lg:mt-0 lg:w-40 lg:translate-x-6 lg:translate-y-6">
-            <div className="rounded-panel bg-button p-2 shadow-card">
-              <div className="overflow-hidden rounded">
+            <div className="rounded-phone bg-button p-2 shadow-card">
+              <div className="overflow-hidden rounded-panel">
                 <Image
                   src={featured.screen}
                   alt="Nisoine のホーム画面"
