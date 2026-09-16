@@ -21,6 +21,9 @@
   --color-coral-text: #d9807b;
   --color-coral-soft: #f9e0da;
   --color-coral-line: #e9aba7;
+  --color-marker-amber: #e8b96a;
+  --color-marker-green: #7fc79f;
+  --color-marker-sage: #a9c5ac;
   --color-card: #f6f5f0;
   --color-line: #e3e2dc;
   --color-line-strong: #cfcdc6;
@@ -78,6 +81,58 @@
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
+
+  /* HOW I WORK 背景の星空。on-navy を薄めた小さな radial-gradient を複数重ねる */
+  --background-image-stars: radial-gradient(
+      1px 1px at 6% 18%,
+      color-mix(in srgb, var(--color-on-navy) 70%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1.5px 1.5px at 16% 68%,
+      color-mix(in srgb, var(--color-on-navy) 55%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 32% 12%,
+      color-mix(in srgb, var(--color-on-navy) 60%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 48% 42%,
+      color-mix(in srgb, var(--color-on-navy) 45%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1.5px 1.5px at 64% 22%,
+      color-mix(in srgb, var(--color-on-navy) 65%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 78% 58%,
+      color-mix(in srgb, var(--color-on-navy) 50%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 88% 14%,
+      color-mix(in srgb, var(--color-on-navy) 60%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1.5px 1.5px at 92% 72%,
+      color-mix(in srgb, var(--color-on-navy) 55%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 10% 88%,
+      color-mix(in srgb, var(--color-on-navy) 45%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1px 1px at 58% 84%,
+      color-mix(in srgb, var(--color-on-navy) 50%, transparent),
+      transparent 60%
+    );
 }
 
 /* フォント変数は layout.tsx の next/font が <html> に定義する */

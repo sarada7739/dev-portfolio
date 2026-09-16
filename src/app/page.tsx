@@ -2,6 +2,7 @@ import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 import Featured from "@/components/sections/Featured";
 import Works from "@/components/sections/Works";
+import HowIWork from "@/components/sections/HowIWork";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -18,6 +19,7 @@ export default function Home() {
         </section>
         <Featured />
         <Works />
+        <HowIWork />
       </main>
     </>
   );

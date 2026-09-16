@@ -24,6 +24,9 @@
 | coral-text | #d9807b | タグ文字 |
 | coral-soft | #f9e0da | タグ背景 |
 | coral-line | #e9aba7 | HOW I WORK 下端の珊瑚色の区切り線 |
+| marker-amber | #e8b96a | HOW I WORK Agents マーカー（triangle） |
+| marker-green | #7fc79f | HOW I WORK Trends マーカー（square） |
+| marker-sage | #a9c5ac | HOW I WORK Craft マーカー（dot） |
 | card | #f6f5f0 | 制作物カードの面（背景より一段明るい） |
 | line | #e3e2dc | カード枠線・薄い罫線 |
 | line-strong | #cfcdc6 | セクションラベル両脇のダッシュ |
@@ -60,6 +63,7 @@
 - 角丸: card 8px（制作物カード・サムネイル）/ panel 10px（HOW I WORK カード）/ pill 9999px（ボタン・タグ）/ phone 40px（Nisoine のスマホ枠）
 - 影: card `0 1px 2px rgb(26 29 35 / 0.04), 0 4px 16px rgb(26 29 35 / 0.04)`。紺地では影なし
 - 罫線: すべて 1px。色は line / navy-border / blush-edge / coral-line
+- 背景画像: `--background-image-stars` — HOW I WORK の星空。on-navy を color-mix で薄めた 1px 前後の radial-gradient を複数重ねる
 
 ## ブレークポイント
 sm 640 / md 768 / lg 1024 / xl 1280（architecture.md の想定どおり。変更なし）
