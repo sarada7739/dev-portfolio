@@ -7,8 +7,8 @@ T-006 | L1 | 完了 | その他の制作物グリッド（WorkCard × 8）
 T-007 | L1 | 完了 | HOW I WORK セクション（夜空背景・4カード）
 T-008 | L1 | 完了 | フッター + 問い合わせフォーム UI（Turnstile ウィジェット含む）
 T-009 | L2 | 完了 | /api/contact Route Handler（zod・Turnstile 検証・Resend 送信）※監査ゲート対象
-T-010 | L1 | 次 | SEO（metadata・OGP・sitemap・robots）
-T-011 | L2 | 未着手 | GitHub Actions（lint/build/audit）+ OpenNext Cloudflare 設定
+T-010 | L1 | 進行中 | SEO（metadata・OGP・sitemap・robots）
+T-011 | L2 | 次 | GitHub Actions（lint/build/audit）+ OpenNext Cloudflare 設定
 T-012 | V2 | 未着手 | 全体の視覚突合（ui-reviewer）とレスポンシブ最終調整
 T-013 | L2 | 未着手 | Cloudflare Pages 接続・環境変数設定・公開確認
-T-014 | L1 | 進行中 | プライバシーポリシーページ /privacy（監査指摘の対応。Resend 米国・30日保存、Turnstile のアクセス情報）
+T-014 | L1 | 完了 | プライバシーポリシーページ /privacy（監査指摘の対応。Resend 米国・30日保存、Turnstile のアクセス情報）
