@@ -2,16 +2,16 @@
 更新: 2026-09-17
 
 ## 進行中
-T-011 GitHub Actions + OpenNext Cloudflare 設定（L2 / impl-l2 / NG 0回）
+T-012 全体の視覚突合（V2 / ui-reviewer → impl-l1 / NG 0回）
 
 ## 直前に完了
-T-010 SEO（続行。NG1回: 根拠コメント漏れ）
+T-011 CI + OpenNext（続行。NG1回: 冒頭コメント。OpenNext ローカルビルドは Windows 非対応で CI 検証に変更）
 
 ## 次にやる
-T-012 全体の視覚突合（ui-reviewer）
+T-013 Cloudflare Pages 接続・公開
 
 ## 詰まっている点
-- `next dev` が AGENTS.md 末尾に nextjs-agent-rules ブロックを自動追記する。毎回 `git checkout -- AGENTS.md` で戻している。恒久対策（無効化オプションの有無）は T-011 で調べる
+なし
 
 ## メモ
 - LP参照画像: docs/reference/lp-reference.jpg（V2）

@@ -13,3 +13,5 @@
 2026-09-17 | デザイン | トークン追加: radius-phone 40px（スマホ枠）、aspect-photo 4/3（Nisoine 写真）。抽出時の漏れ。任意値 [...] は引き続き禁止 | T-005
 2026-09-17 | フォーム | 検証エラー文言は日本語。contact-schema.ts の各ルールに message を持たせ、クライアント・サーバーで共用 | T-008
 2026-09-17 | 法令 | 監査の要人間判断（Resend=米国・30日保存の外国第三者提供）はユーザー判断で /privacy ページにのみ詳細を記載。フォーム直下の文言は現行のまま、ポリシーへリンクを追加 | T-009
+2026-09-17 | ビルド | OpenNext build は Windows で symlink EPERM（開発者モード要）。ローカル実行を受入条件から外し CI（Ubuntu）で検証する。開発者モード有効化はユーザー判断に委ねる | T-011
+2026-09-17 | 運用 | next dev の AGENTS.md 自動追記は next.config.ts の agentRules: false で無効化 | T-011
