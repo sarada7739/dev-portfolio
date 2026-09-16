@@ -1,7 +1,20 @@
+import Header from "@/components/sections/Header";
+import Hero from "@/components/sections/Hero";
+import Container from "@/components/ui/Container";
+import SectionLabel from "@/components/ui/SectionLabel";
+
 export default function Home() {
   return (
-    <main>
-      <h1>ポートフォリオ</h1>
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <section id="works" className="bg-cream pb-6">
+          <Container>
+            <SectionLabel label="制作物" />
+          </Container>
+        </section>
+      </main>
+    </>
   );
 }
