@@ -1,5 +1,5 @@
-T-001 | L0 | 進行中 | リポジトリ初期化（git, Next.js + Tailwind v4 雛形, ESLint/Prettier, .gitignore, .env.example）
-T-002 | V2 | 未着手 | デザイントークン抽出 → docs/design-tokens.md と globals.css @theme
+T-001 | L0 | 完了 | リポジトリ初期化（git, Next.js + Tailwind v4 雛形, ESLint/Prettier, .gitignore, .env.example）
+T-002 | V2 | 進行中 | デザイントークン抽出 → docs/design-tokens.md と globals.css @theme
 T-003 | L1 | 未着手 | 制作物データ works.json / how-i-work.json とプレースホルダ画像
 T-004 | L1 | 未着手 | ヘッダー + ヒーローセクション
 T-005 | L1 | 未着手 | Nisoine セクション（写真・アプリ画面・技術タグ）
