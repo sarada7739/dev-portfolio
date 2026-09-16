@@ -1,0 +1,30 @@
+[
+  {
+    "title": "AIツールをフル活用",
+    "body": "Claude, GPT, Nano Banana などの画像生成・コーディングAIを業務フローに組み込み、アイデアから実装までを最短で。",
+    "label": "Tools",
+    "marker": "circle",
+    "markerColor": "coral"
+  },
+  {
+    "title": "サブエージェントと並列セッション",
+    "body": "Super Agent × 子エージェントの並列実行 + 複数セッション横断で、相互レビューと監査を繰り返す。",
+    "label": "Agents",
+    "marker": "triangle",
+    "markerColor": "amber"
+  },
+  {
+    "title": "最新のトレンドを、毎日追う",
+    "body": "Apple HIG / Material You / 2026年のWeb表現 / AIエージェント設計など、国内外の最前線を毎週チェック。",
+    "label": "Trends",
+    "marker": "square",
+    "markerColor": "green"
+  },
+  {
+    "title": "人間の手で、最後のひと手間",
+    "body": "AIの出力に甘えず、タイポグラフィ・色味・余白を、自分の目で最後まで磨き込む。",
+    "label": "Craft",
+    "marker": "dot",
+    "markerColor": "sage"
+  }
+]

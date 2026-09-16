@@ -1,0 +1,66 @@
+[
+  {
+    "slug": "task-queue",
+    "title": "タスクキュー",
+    "description": "チームで動く、やさしいカンバン",
+    "year": "Y2026",
+    "thumbnail": "/images/works/task-queue.svg",
+    "href": "#"
+  },
+  {
+    "slug": "mesh-note",
+    "title": "メッシュノート",
+    "description": "ノートを、知識の網に",
+    "year": "Y2025",
+    "thumbnail": "/images/works/mesh-note.svg",
+    "href": "#"
+  },
+  {
+    "slug": "shippu",
+    "title": "しっぷ",
+    "description": "夜の、静かなサウンド",
+    "year": "Y2026",
+    "thumbnail": "/images/works/shippu.svg",
+    "href": "#"
+  },
+  {
+    "slug": "pito",
+    "title": "ぴーと",
+    "description": "書くための、最小の道具",
+    "year": "Y2025",
+    "thumbnail": "/images/works/pito.svg",
+    "href": "#"
+  },
+  {
+    "slug": "wall",
+    "title": "ウォール",
+    "description": "時間を、視る。",
+    "year": "Y2025",
+    "thumbnail": "/images/works/wall.svg",
+    "href": "#"
+  },
+  {
+    "slug": "aruboa",
+    "title": "アルボア",
+    "description": "書くことで、整理する一日",
+    "year": "Y2026",
+    "thumbnail": "/images/works/aruboa.svg",
+    "href": "#"
+  },
+  {
+    "slug": "mori",
+    "title": "もり",
+    "description": "静かに続く、小さな習慣",
+    "year": "Y2026",
+    "thumbnail": "/images/works/mori.svg",
+    "href": "#"
+  },
+  {
+    "slug": "echo",
+    "title": "エコー",
+    "description": "残す、声の、軌跡。",
+    "year": "Y2026",
+    "thumbnail": "/images/works/echo.svg",
+    "href": "#"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "N",
+  "tagline": "しずかな道具を、\nしずかなふたりへ。",
+  "sub": "個人開発者 — 東京から、ていねいに。",
+  "nav": ["制作物", "一覧", "お問い合わせ"],
+  "email": "hi@yourname.dev",
+  "social": [
+    { "label": "GitHub", "href": "#" },
+    { "label": "Twitter", "href": "#" },
+    { "label": "Note", "href": "#" }
+  ],
+  "copyright": "© 2026 — 個人開発 おしごと相談"
+}
