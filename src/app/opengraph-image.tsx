@@ -70,8 +70,8 @@ export default async function Image() {
         </div>
         <div
           style={{
-            marginTop: 24,
-            fontSize: 20,
+            marginTop: 24, // docs/design-tokens.md 余白スケール 24
+            fontSize: 20, // docs/design-tokens.md h3 スケール（デスクトップ側）
             color: GRAY,
           }}
         >
