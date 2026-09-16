@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Noto_Sans_JP,
+  Shippori_Mincho,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 日本語フォントは subsets に japanese が無いため latin を指定し、CJK は unicode-range 分割で配信される
+const serifJp = Shippori_Mincho({
+  variable: "--font-serif-jp",
+  weight: ["500", "600"],
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sansJp = Noto_Sans_JP({
+  variable: "--font-sans-jp",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+});
+
+const serifLatin = Cormorant_Garamond({
+  variable: "--font-serif-latin",
+  weight: ["500", "600"],
+  style: ["italic", "normal"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,8 +37,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="ja"
+      className={`${serifJp.variable} ${sansJp.variable} ${serifLatin.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
