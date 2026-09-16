@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { contactSchema, type ContactInput } from "@/lib/contact-schema";
 
@@ -124,7 +125,9 @@ export default function ContactForm() {
 
       <p className="mt-4 text-caption text-gray">
         いただいた情報は返信のためにのみ使用し、それ以外の目的には使いません。送信時に Cloudflare
-        Turnstile と Resend を利用します。
+        Turnstile と Resend を利用します。詳しくは
+        <Link href="/privacy">プライバシーポリシー</Link>
+        をご覧ください。
       </p>
     </div>
   );
