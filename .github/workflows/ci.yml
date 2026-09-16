@@ -19,4 +19,6 @@ jobs:
       - run: pnpm lint
       - run: pnpm test
       - run: pnpm build
+      - name: OpenNext build (Cloudflare)
+        run: pnpm exec opennextjs-cloudflare build
       - run: pnpm audit --audit-level high

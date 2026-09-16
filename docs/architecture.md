@@ -66,6 +66,7 @@ docs/
 3. 環境変数を上表のとおり設定
 4. 独自ドメインを割り当て（任意）
 5. ローカル確認は `pnpm preview`（build + wrangler preview）、本番デプロイは `pnpm deploy`（T-013 で実施）
+6. ローカル Windows では OpenNext ビルドが symlink の権限で失敗する（開発者モード有効化または WSL で回避）。検証は CI と Cloudflare 側のビルドで行う
 
 ## 状態管理
 - クライアント状態はフォームの入力値・送信状態のみ。`useState` で足りる。状態管理ライブラリは入れない
