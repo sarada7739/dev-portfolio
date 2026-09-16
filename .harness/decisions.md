@@ -10,3 +10,4 @@
 2026-09-17 | 素材 | Nisoine の実素材3点を docs/reference/nisoine/ に保管。LP参照画像のスマホ枠には screen-home.png を使う | T-005
 2026-09-17 | 運用 | GitHub リポジトリ名は dev-portfolio | T-013
 2026-09-17 | コンテンツ | 4件目の作品名は画像どおり「ぴーと」。タスク起票時の「びーと」は誤記 | T-003
+2026-09-17 | デザイン | トークン追加: radius-phone 40px（スマホ枠）、aspect-photo 4/3（Nisoine 写真）。抽出時の漏れ。任意値 [...] は引き続き禁止 | T-005

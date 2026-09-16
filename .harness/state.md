@@ -2,13 +2,13 @@
 更新: 2026-09-17
 
 ## 進行中
-T-005 Nisoine セクション（L1 / impl-l1 / NG 0回）
+T-006 その他の制作物グリッド（L1 / impl-l1 / NG 0回）
 
 ## 直前に完了
-T-004 ヘッダー + ヒーロー（続行。ui/{Container,Button,SectionLabel} 作成）
+T-005 Nisoine セクション（続行。radius-phone / aspect-photo トークン追加）
 
 ## 次にやる
-T-006 その他の制作物グリッド
+T-007 HOW I WORK セクション
 
 ## 詰まっている点
 - `next dev` が AGENTS.md 末尾に nextjs-agent-rules ブロックを自動追記する。毎回 `git checkout -- AGENTS.md` で戻している。恒久対策（無効化オプションの有無）は T-011 で調べる
