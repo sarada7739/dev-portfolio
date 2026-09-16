@@ -2,16 +2,16 @@
 更新: 2026-09-17
 
 ## 進行中
-T-004 ヘッダー + ヒーロー（L1 / impl-l1 / NG 0回）
+T-005 Nisoine セクション（L1 / impl-l1 / NG 0回）
 
 ## 直前に完了
-T-003 制作物データ（続行。src/data/ に JSON 4件＋型）
+T-004 ヘッダー + ヒーロー（続行。ui/{Container,Button,SectionLabel} 作成）
 
 ## 次にやる
-T-005 Nisoine セクション
+T-006 その他の制作物グリッド
 
 ## 詰まっている点
-なし
+- `next dev` が AGENTS.md 末尾に nextjs-agent-rules ブロックを自動追記する。毎回 `git checkout -- AGENTS.md` で戻している。恒久対策（無効化オプションの有無）は T-011 で調べる
 
 ## メモ
 - LP参照画像: docs/reference/lp-reference.jpg（V2）
