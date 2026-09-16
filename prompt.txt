@@ -1,0 +1,2 @@
+AGENTS.md の 4.2 節の表に従って .claude/agents/ 配下に
+サブエージェント定義を生成して。tools と model はそのまま反映。
