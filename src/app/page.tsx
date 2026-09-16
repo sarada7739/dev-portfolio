@@ -1,6 +1,7 @@
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 import Featured from "@/components/sections/Featured";
+import Works from "@/components/sections/Works";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -16,6 +17,7 @@ export default function Home() {
           </Container>
         </section>
         <Featured />
+        <Works />
       </main>
     </>
   );
