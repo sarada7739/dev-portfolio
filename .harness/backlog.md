@@ -3,9 +3,9 @@ T-002 | V2 | 完了 | デザイントークン抽出 → docs/design-tokens.md �
 T-003 | L1 | 完了 | 制作物データ works.json / how-i-work.json とプレースホルダ画像
 T-004 | L1 | 完了 | ヘッダー + ヒーローセクション
 T-005 | L1 | 完了 | Nisoine セクション（写真・アプリ画面・技術タグ）
-T-006 | L1 | 進行中 | その他の制作物グリッド（WorkCard × 8）
-T-007 | L1 | 次 | HOW I WORK セクション（夜空背景・4カード）
-T-008 | L1 | 未着手 | フッター + 問い合わせフォーム UI（Turnstile ウィジェット含む）
+T-006 | L1 | 完了 | その他の制作物グリッド（WorkCard × 8）
+T-007 | L1 | 進行中 | HOW I WORK セクション（夜空背景・4カード）
+T-008 | L1 | 次 | フッター + 問い合わせフォーム UI（Turnstile ウィジェット含む）
 T-009 | L2 | 未着手 | /api/contact Route Handler（zod・Turnstile 検証・Resend 送信）※監査ゲート対象
 T-010 | L1 | 未着手 | SEO（metadata・OGP・sitemap・robots）
 T-011 | L2 | 未着手 | GitHub Actions（lint/build/audit）+ OpenNext Cloudflare 設定
