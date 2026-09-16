@@ -30,8 +30,11 @@ export type HowIWorkItem = {
   markerColor: "coral" | "amber" | "green" | "sage";
 };
 
-// サイト共通のメタ情報（ヘッダー・フッターで参照）
+// サイト共通のメタ情報（ヘッダー・フッター・SEO metadata で参照）
 export type SiteMeta = {
+  url: string;
+  title: string;
+  description: string;
   name: string;
   tagline: string;
   sub: string;
