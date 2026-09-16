@@ -2,10 +2,10 @@
 更新: 2026-09-17
 
 ## 進行中
-T-009 /api/contact Route Handler（L2 / impl-l2 / NG 0回 / 監査ゲート対象）
+T-014 プライバシーポリシーページ（L1 / impl-l1 / NG 0回）
 
 ## 直前に完了
-T-008 フッター + フォーム UI（続行。zod / react-turnstile 追加、日本語文言）
+T-009 /api/contact（続行・監査はユーザー判断で T-014 へ）
 
 ## 次にやる
 T-010 SEO（metadata・OGP・sitemap・robots）
@@ -18,5 +18,5 @@ T-010 SEO（metadata・OGP・sitemap・robots）
 - Nisoine 実素材: docs/reference/nisoine/{hero-sunset.jpg, screen-timeline.png, screen-home.png, phone-frame.png}。phone-frame は任意
 - 他8作品の素材は未入手。プレースホルダで進める
 - GitHub リポジトリ名: dev-portfolio（T-013 前に作成）
-- .claude/agents/ はセッション再起動後に有効。それまでは general-purpose + model 指定で代替
+- .claude/agents/ は有効。impl-l1 / reviewer / auditor 等を名前で委譲する
 - トークン確定済み。セクション実装はトークンのみ使い、生の px/hex を書かない
