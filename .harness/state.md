@@ -2,13 +2,13 @@
 更新: 2026-09-17
 
 ## 進行中
-T-010 SEO（L1 / impl-l1 / NG 0回）
+T-011 GitHub Actions + OpenNext Cloudflare 設定（L2 / impl-l2 / NG 0回）
 
 ## 直前に完了
-T-014 プライバシーポリシーページ（続行。監査指摘を解消）
+T-010 SEO（続行。NG1回: 根拠コメント漏れ）
 
 ## 次にやる
-T-011 GitHub Actions + OpenNext Cloudflare 設定
+T-012 全体の視覚突合（ui-reviewer）
 
 ## 詰まっている点
 - `next dev` が AGENTS.md 末尾に nextjs-agent-rules ブロックを自動追記する。毎回 `git checkout -- AGENTS.md` で戻している。恒久対策（無効化オプションの有無）は T-011 で調べる
