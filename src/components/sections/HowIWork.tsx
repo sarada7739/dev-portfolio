@@ -8,7 +8,7 @@ export default function HowIWork() {
   return (
     <section
       id="how-i-work"
-      className="relative overflow-hidden border-y border-coral-line bg-linear-to-b from-navy-light to-navy-deep py-section-sm md:py-section"
+      className="relative isolate overflow-hidden border-y border-coral-line bg-linear-to-b from-navy-light to-navy-deep py-section-sm md:py-section"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-stars" />
       <Container>
