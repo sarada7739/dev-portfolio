@@ -33,9 +33,13 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 .env*.local
+!.env.example
 
 # open-next build output
 .open-next/
+
+# wrangler build output / local state
+.wrangler/
 
 # vercel
 .vercel

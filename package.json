@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.6.1",
@@ -19,6 +21,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,7 +31,8 @@
     "prettier": "^3.9.6",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "wrangler": "^4.132.0"
   },
   "packageManager": "pnpm@11.24.0"
 }

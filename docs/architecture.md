@@ -61,10 +61,11 @@ docs/
 - ローカルは `.env.local`（git 管理外）。`.env.example` にキー名のみ置く
 
 ## デプロイ手順
-1. GitHub リポジトリを Cloudflare Pages に接続（main ブランチ）
-2. ビルドコマンド: `pnpm build && pnpm exec opennextjs-cloudflare build`
+1. GitHub リポジトリ（dev-portfolio）を Cloudflare Workers/Pages の Git 連携に接続（main ブランチ）
+2. ビルドコマンド: `pnpm install --frozen-lockfile && pnpm exec opennextjs-cloudflare build`
 3. 環境変数を上表のとおり設定
 4. 独自ドメインを割り当て（任意）
+5. ローカル確認は `pnpm preview`（build + wrangler preview）、本番デプロイは `pnpm deploy`（T-013 で実施）
 
 ## 状態管理
 - クライアント状態はフォームの入力値・送信状態のみ。`useState` で足りる。状態管理ライブラリは入れない
