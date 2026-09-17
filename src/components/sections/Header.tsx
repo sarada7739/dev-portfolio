@@ -25,8 +25,8 @@ export default function Header() {
             />
           </svg>
         </span>
-        <nav aria-label="サイト内ナビゲーション">
-          <ul className="flex flex-wrap items-center gap-2 text-label tracking-nav text-ink-soft">
+        <nav aria-label="サイト内ナビゲーション" className="basis-full sm:basis-auto">
+          <ul className="flex flex-wrap items-center gap-2 text-caption tracking-nav text-ink-soft sm:text-label">
             {site.nav.map((item, index) => (
               <li key={item} className="flex items-center gap-2">
                 {index > 0 ? <span aria-hidden="true">/</span> : null}

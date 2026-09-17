@@ -16,3 +16,4 @@
 2026-09-17 | ビルド | OpenNext build は Windows で symlink EPERM（開発者モード要）。ローカル実行を受入条件から外し CI（Ubuntu）で検証する。開発者モード有効化はユーザー判断に委ねる | T-011
 2026-09-17 | 運用 | next dev の AGENTS.md 自動追記は next.config.ts の agentRules: false で無効化 | T-011
 2026-09-17 | 運用 | Fable 5.1 がクレジット切れの場合、impl-ui / ui-reviewer / impl-l4 は opus で代替する（ユーザー指示） | -
+2026-09-17 | デザイン | h1 は 52px でなく計測どおり 50px。Nisoine 見出し10文字がカラム幅(523px)を超えたため。グリッド比率は変えない | T-012

@@ -13,7 +13,7 @@ export default function Featured() {
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div>
           <p className="text-label tracking-label text-coral">{featured.label}</p>
-          <h3 className="text-balance mt-3 font-serif text-h1 text-ink">
+          <h3 className="mt-3 font-serif text-h1 text-ink">
             {headingLines.map((line, index) => (
               <span key={line}>
                 {line}
