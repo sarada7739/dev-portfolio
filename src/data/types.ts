@@ -38,6 +38,7 @@ export type SiteMeta = {
   name: string;
   tagline: string;
   sub: string;
+  author: string;
   nav: string[];
   email: string;
   social: { label: string; href: string }[];

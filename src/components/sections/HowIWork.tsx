@@ -14,7 +14,7 @@ export default function HowIWork() {
       <Container>
         <SectionLabel label="HOW I WORK" tone="onNavy" />
         <h2 className="text-balance mt-6.5 text-center font-serif text-h1 text-on-navy">
-          <span className="font-display italic">AI</span>を、ていねいに使う。
+          <span className="font-display italic">AI</span>を、相棒に
         </h2>
         <div className="mt-9.5 flex flex-col gap-4">
           {howIWork.map((item) => (

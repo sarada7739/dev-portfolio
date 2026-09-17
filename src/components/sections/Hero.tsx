@@ -17,6 +17,7 @@ export default function Hero() {
           ))}
         </h1>
         <p className="mt-7 text-lead text-ink-soft">{site.sub}</p>
+        <p className="text-small tracking-wide text-ink-soft">{site.author}</p>
         <div className="mt-7">
           <Button href="#works" arrow="↓">
             制作物を見る

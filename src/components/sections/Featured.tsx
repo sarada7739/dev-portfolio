@@ -28,7 +28,7 @@ export default function Featured() {
             ))}
           </div>
           <div className="mt-6">
-            <Button href={featured.ctaHref} arrow="→">
+            <Button href={featured.ctaHref} arrow="→" tone="coral" external>
               {featured.ctaLabel}
             </Button>
           </div>

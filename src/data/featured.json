@@ -3,8 +3,8 @@
   "heading": "テキストでは足りない\nふたりのために。",
   "description": "カップルの日記 · iOS / Android · Cloudflare + Hono + Stripe",
   "tags": ["Hono", "React", "TypeScript", "D1", "Drizzle", "Stripe", "SwiftUI"],
-  "ctaLabel": "事例を読む",
-  "ctaHref": "#",
+  "ctaLabel": "はじめる",
+  "ctaHref": "https://nisoine.com/",
   "photo": "/images/nisoine/hero-sunset.jpg",
   "screen": "/images/nisoine/screen-home.png",
   "phoneFrame": "/images/nisoine/phone-frame.png"
