@@ -26,7 +26,7 @@ export default function Marker({ shape, color }: MarkerProps) {
       <svg
         aria-hidden="true"
         viewBox="0 0 12 12"
-        className={`mt-1 size-3 shrink-0 ${MARKER_FILL[color]}`}
+        className={`mt-1 size-5 shrink-0 ${MARKER_FILL[color]}`}
       >
         <path d="M6 1 11 10 1 10Z" />
       </svg>
@@ -35,7 +35,7 @@ export default function Marker({ shape, color }: MarkerProps) {
   return (
     <span
       aria-hidden="true"
-      className={`mt-1 size-3 shrink-0 ${shape === "square" ? "rounded-xs" : "rounded-full"} ${MARKER_BG[color]}`}
+      className={`mt-1 size-5 shrink-0 ${shape === "square" ? "rounded-xs" : "rounded-full"} ${MARKER_BG[color]}`}
     />
   );
 }

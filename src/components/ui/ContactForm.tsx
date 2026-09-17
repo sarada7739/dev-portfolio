@@ -50,7 +50,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md">
+    <div className="mx-auto mt-8 w-full max-w-md">
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label htmlFor={nameId} className="text-small text-ink-soft">

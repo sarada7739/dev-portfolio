@@ -9,11 +9,11 @@ export default function Featured() {
   const headingLines = featured.heading.split("\n");
 
   return (
-    <section className="border-b border-blush-edge bg-blush py-section-sm md:py-section">
+    <section className="border-b border-blush-edge bg-blush pb-8 pt-7">
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div>
           <p className="text-label tracking-label text-coral">{featured.label}</p>
-          <h3 className="mt-3 font-serif text-h1 text-ink">
+          <h3 className="text-balance mt-3 font-serif text-h1 text-ink">
             {headingLines.map((line, index) => (
               <span key={line}>
                 {line}
@@ -22,7 +22,7 @@ export default function Featured() {
             ))}
           </h3>
           <p className="mt-4 text-small text-gray">{featured.description}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-4">
             {featured.tags.map((tag) => (
               <Tag key={tag} label={tag} />
             ))}
@@ -33,18 +33,18 @@ export default function Featured() {
             </Button>
           </div>
         </div>
-        <div className="lg:relative">
-          <div className="relative aspect-photo w-full overflow-hidden rounded-card">
+        <div className="lg:flex lg:items-start">
+          <div className="relative aspect-photo w-full overflow-hidden rounded-card lg:flex-1">
             <Image
               src={featured.photo}
               alt="海辺で夕日を眺めるふたり"
               fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 40vw, 100vw"
               className="object-cover"
             />
           </div>
-          {/* スマホ枠は phone-frame.png を使わず bg-button の CSS 枠で描く */}
-          <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:absolute lg:right-0 lg:bottom-0 lg:mx-0 lg:mt-0 lg:w-40 lg:translate-x-6 lg:translate-y-6">
+          {/* モバイル: 写真の下に中央 / lg 以上: 写真の右に隣接（重ねない） */}
+          <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:mx-0 lg:mt-0 lg:w-40 lg:shrink-0 lg:-translate-y-3.25">
             <div className="rounded-phone bg-button p-2 shadow-card">
               <div className="overflow-hidden rounded-panel">
                 <Image

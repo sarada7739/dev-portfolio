@@ -13,7 +13,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <section id="works" className="bg-cream pb-6">
+        <section id="works" className="bg-cream pb-4.25">
           <Container>
             <SectionLabel label="制作物" />
           </Container>

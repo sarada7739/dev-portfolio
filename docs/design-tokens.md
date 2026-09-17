@@ -39,31 +39,32 @@
 
 | スケール | サイズ（clamp: モバイル → デスクトップ） | 行間 | 字間 |
 |---|---|---|---|
-| display | 36px → 56px | 1.3 | 0.02em |
-| h1 | 30px → 44px | 1.35 | 0.02em |
-| h2 | 22px → 28px | 1.4 | 0.02em |
-| h3 | 18px → 20px | 1.5 | 0.02em |
+| display | 34px → 62px | 1.2 | 0.02em |
+| h1 | 28px → 52px | 1.35 | 0.02em |
+| h2 | 31px | 1.4 | 0.02em |
+| h3 | 20px | 1.5 | 0.02em |
 | body | 16px | 1.8 | 0.02em |
+| lead | 18px（サブコピー・フッターのメール。色は ink-soft） | 1.7 | 0.02em |
 | small | 14px | 1.7 | 0.02em |
 | caption | 12px | 1.5 | 0.1em |
-| label | 12px | 1 | 0.25em（NISOINE / HOW I WORK / 「— 制作物 —」。英字は大文字） |
+| label | 16px（セクションラベル・NISOINE・ナビ。英字は大文字） | 1 | 0.25em |
 
-字間トークン: heading 0.02em / wide 0.1em（ナビ・年号）/ label 0.25em。
+字間トークン: heading 0.02em / wide 0.1em（年号・SNS）/ label 0.25em / nav 0.18em（ヘッダーナビ、色 ink-soft）。
 
 ## 余白・レイアウト
-- 余白スケール: 4px 基準（4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128）。Tailwind の `--spacing: 0.25rem` をそのまま使う
-- セクション上下余白: デスクトップ 96px（section）/ モバイル 64px（section-sm）。ヒーローは上 48px・下 64px
-- コンテナ最大幅: 1200px。左右余白: モバイル 24px / md 以上 48px
+- 余白スケール: 4px 基準。Tailwind の `--spacing: 0.25rem` の倍数クラス（`pt-11.75` 等の小数倍も可）をそのまま使う
+- セクション上下余白: デスクトップ 48px（section）/ モバイル 40px（section-sm）。各セクション固有の余白は個別に px 換算した倍数クラスで指定する（例: ヒーロー pt-10 pb-9.25）
+- コンテナ最大幅: 1270px（container-content）。左右余白: モバイル 24px / md 48px / lg 以上 88px（gutter-lg）
 - ナビ高さ: 64px。セクションラベルと見出しの間: 24px。見出しとサブコピーの間: 16px。ボタンまで: 32px
 - 制作物グリッド: 4列（lg 1024px 以上）→ 2列（sm 640px 以上）→ 1列。カード間隔 20px。サムネイル比率 5:3
-- HOW I WORK のカード: 縦積み、間隔 16px、内側余白 20px 24px、左のマーカー 12px 円、右端ラベルは caption
-- 写真比率 4:3（Nisoine の写真）
+- HOW I WORK のカード: 縦積み、間隔 16px、内側余白 40px/20px、左のマーカー 20px（size-5）、右端ラベルは caption
+- 写真比率 13:12（Nisoine の写真）。スマホ枠は写真の右に隣接配置（lg 以上のみ。lg 未満は写真の下に中央）
 
 ## 角丸・影・罫線
 - 角丸: card 8px（制作物カード・サムネイル）/ panel 10px（HOW I WORK カード）/ pill 9999px（ボタン・タグ）/ phone 40px（Nisoine のスマホ枠）
 - 影: card `0 1px 2px rgb(26 29 35 / 0.04), 0 4px 16px rgb(26 29 35 / 0.04)`。紺地では影なし
-- 罫線: すべて 1px。色は line / navy-border / blush-edge / coral-line
-- 背景画像: `--background-image-stars` — HOW I WORK の星空。on-navy を color-mix で薄めた 1px 前後の radial-gradient を複数重ねる
+- 罫線: 基本 1px。色は line / navy-border / blush-edge / coral-line。HOW I WORK 上下の珊瑚線のみ 3px（`border-width-accent` → `border-y-accent` ユーティリティ）
+- 背景画像: `--background-image-stars` — HOW I WORK の星空。on-navy を 60〜90% に薄めた 2〜3px の radial-gradient を左右の帯に計 22 個配置
 
 ## ブレークポイント
 sm 640 / md 768 / lg 1024 / xl 1280（architecture.md の想定どおり。変更なし）
