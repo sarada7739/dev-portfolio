@@ -2,10 +2,10 @@
 更新: 2026-09-18
 
 ## 進行中
-なし
+T-018 スマホを実機モックアップ画像に差し替え（L1 / impl-l1 / NG 0回）
 
 ## 直前に完了
-T-013 公開（初回リリース完了。https://dev-portfolio.sarada7739.workers.dev）
+T-017 Nisoine 写真を 3:2・左右フェード・見出しの下まで拡張（続行）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -20,7 +20,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - LP参照画像: docs/reference/lp-reference.jpg。Nisoine 実素材: docs/reference/nisoine/
 - 他8作品の素材は未入手（プレースホルダのまま）
 - OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
-- Fable 5.1 がクレジット切れなら impl-ui / ui-reviewer / impl-l4 は opus で代替
+- Fable 5.1 は使わない。impl-ui / ui-reviewer / impl-l4 は general-purpose + model opus で実行
 - サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
 
 ## 次のバックログ候補（未起票）
