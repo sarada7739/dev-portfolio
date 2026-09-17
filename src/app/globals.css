@@ -82,7 +82,7 @@
   --border-width-accent: 3px;
 
   --aspect-thumb: 5 / 3;
-  --aspect-photo: 13 / 12;
+  --aspect-photo: 3 / 2;
   --aspect-phone: 5 / 9;
 
   --breakpoint-sm: 40rem;
@@ -214,4 +214,9 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* 写真の左右を背景色へ溶け込ませる。マスクなので下地の色を問わず使える */
+@utility fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
