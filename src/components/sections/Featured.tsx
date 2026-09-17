@@ -33,7 +33,7 @@ export default function Featured() {
             </Button>
           </div>
         </div>
-        <div className="lg:flex lg:items-start">
+        <div className="lg:flex lg:items-center">
           <div className="relative aspect-photo w-full overflow-hidden rounded-card lg:flex-1">
             <Image
               src={featured.photo}
@@ -43,8 +43,8 @@ export default function Featured() {
               className="object-cover"
             />
           </div>
-          {/* モバイル: 写真の下に中央 / lg 以上: 写真の右に隣接（重ねない） */}
-          <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:mx-0 lg:mt-0 lg:w-40 lg:shrink-0 lg:-translate-y-3.25">
+          {/* モバイル: 写真の下に中央（従来どおり） */}
+          <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:hidden">
             <div className="rounded-phone bg-button p-2 shadow-card">
               <div className="overflow-hidden rounded-panel">
                 <Image
@@ -53,6 +53,20 @@ export default function Featured() {
                   width={300}
                   height={650}
                   className="h-auto w-full"
+                />
+              </div>
+            </div>
+          </div>
+          {/* lg 以上: 写真の右に隣接・上下中央（重ねない） */}
+          <div className="hidden lg:block lg:w-1/3 lg:shrink-0 lg:self-center">
+            <div className="relative aspect-phone overflow-hidden rounded-phone bg-button p-2 shadow-card">
+              <div className="relative h-full overflow-hidden rounded-panel">
+                <Image
+                  src={featured.screen}
+                  alt="Nisoine のホーム画面"
+                  fill
+                  sizes="15vw"
+                  className="object-cover"
                 />
               </div>
             </div>

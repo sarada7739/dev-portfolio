@@ -11,7 +11,7 @@ const NAV_HREF: Record<string, string> = {
 export default function Header() {
   return (
     <header className="bg-cream">
-      <Container className="flex min-h-nav flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4">
+      <Container className="flex h-nav flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <span className="relative inline-flex font-serif text-h2 text-ink">
           {site.name}
           <svg

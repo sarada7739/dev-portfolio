@@ -83,6 +83,7 @@
 
   --aspect-thumb: 5 / 3;
   --aspect-photo: 13 / 12;
+  --aspect-phone: 5 / 9;
 
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;

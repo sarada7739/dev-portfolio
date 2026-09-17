@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="bg-cream-deep pb-section-sm pt-9 lg:pb-section">
       <Container className="flex flex-col items-center text-center">
-        <h2 className="font-serif text-h2 text-ink-soft">ご一緒に、ものづくりを。</h2>
+        <h2 className="text-balance font-serif text-h2 text-ink-soft">ご一緒に、ものづくりを。</h2>
         <ContactForm />
         <a
           href={`mailto:${site.email}`}
