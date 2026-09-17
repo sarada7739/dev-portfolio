@@ -2,13 +2,13 @@
 更新: 2026-09-17
 
 ## 進行中
-T-012 全体の視覚突合（V2 / ui-reviewer → impl-l1 / NG 2回）
+T-013 Cloudflare 接続・公開（L2 / メイン + impl-l0 / NG 0回）
 
 ## 直前に完了
-T-011 CI + OpenNext（続行。NG1回: 冒頭コメント。OpenNext ローカルビルドは Windows 非対応で CI 検証に変更）
+T-012 視覚突合（続行。NG2回。残差は archive/tasks/T-012.md）
 
 ## 次にやる
-T-013 Cloudflare Pages 接続・公開
+なし（T-013 で初回リリース完了）
 
 ## 詰まっている点
 なし
