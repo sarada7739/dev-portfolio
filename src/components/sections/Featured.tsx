@@ -43,33 +43,26 @@ export default function Featured() {
               className="object-cover"
             />
           </div>
-          {/* モバイル: 写真の下に中央（従来どおり） */}
-          <div className="relative mx-auto mt-6 w-32 sm:w-36 lg:hidden">
-            <div className="rounded-phone bg-button p-2 shadow-card">
-              <div className="overflow-hidden rounded-panel">
-                <Image
-                  src={featured.screen}
-                  alt="Nisoine のホーム画面"
-                  width={300}
-                  height={650}
-                  className="h-auto w-full"
-                />
-              </div>
-            </div>
+          {/* モバイル: 写真の下に中央 */}
+          <div className="relative mx-auto mt-6 w-48 lg:hidden">
+            <Image
+              src={featured.phoneFrame}
+              alt="Nisoine のホーム画面（スマホ）"
+              width={359}
+              height={714}
+              className="h-auto w-full"
+            />
           </div>
           {/* lg 以上: 写真の右に隣接・上下中央（重ねない） */}
           <div className="hidden lg:block lg:w-1/3 lg:shrink-0 lg:self-center">
-            <div className="relative aspect-phone overflow-hidden rounded-phone bg-button p-2 shadow-card">
-              <div className="relative h-full overflow-hidden rounded-panel">
-                <Image
-                  src={featured.screen}
-                  alt="Nisoine のホーム画面"
-                  fill
-                  sizes="15vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            <Image
+              src={featured.phoneFrame}
+              alt="Nisoine のホーム画面（スマホ）"
+              width={359}
+              height={714}
+              sizes="15vw"
+              className="h-auto w-full"
+            />
           </div>
         </div>
       </Container>

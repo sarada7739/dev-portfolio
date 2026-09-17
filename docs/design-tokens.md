@@ -66,6 +66,7 @@
 - 影: card `0 1px 2px rgb(26 29 35 / 0.04), 0 4px 16px rgb(26 29 35 / 0.04)`。紺地では影なし
 - 罫線: 基本 1px。色は line / navy-border / blush-edge / coral-line。HOW I WORK 上下の珊瑚線のみ 3px（`border-width-accent` → `border-y-accent` ユーティリティ）
 - 背景画像: `--background-image-stars` — HOW I WORK の星空。on-navy を 60〜90% に薄めた 2〜3px の radial-gradient を左右の帯に計 22 個配置
+- `aspect-phone` / `phone`（角丸）: T-018 で実機モックアップ画像に差し替えたため未使用。トークン自体は削除しない
 
 ## ブレークポイント
 sm 640 / md 768 / lg 1024 / xl 1280（architecture.md の想定どおり。変更なし）
