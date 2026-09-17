@@ -1,6 +1,7 @@
 ---
 name: reviewer
-description: タスク完了時に受入条件・ビルド・テスト・規約を検証し、続行かNGの一語で判定する。書き込み権限なし。
+description: タスク- ユーザーのプロセスを巻き込むコマンドを禁止する（`taskkill /IM chrome.exe` `pkill chrome` 等）。自分が起動したプロセスは PID を控えて、その PID だけを終了する。
+完了時に受入条件・ビルド・テスト・規約を検証し、続行かNGの一語で判定する。書き込み権限なし。
 tools: Read, Grep, Glob, Bash
 model: opus
 ---

@@ -14,4 +14,5 @@ model: claude-fable-5-1
 - docs/constraints.md に違反しない。
 - コメントは原則1行、最大3行。「何を」ではなく「なぜ」を書く。
 - TODO は `// TODO(T-xxx): 内容` の形式のみ許可。
+- ユーザーのプロセスを巻き込むコマンドを禁止する（`taskkill /IM chrome.exe` `pkill chrome` 等）。自分が起動したプロセスは PID を控えて、その PID だけを終了する。
 完了時は変更ファイル一覧、受入条件の充足状況、採用/却下した方針を返す。
