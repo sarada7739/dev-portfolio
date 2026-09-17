@@ -218,5 +218,5 @@ body {
 
 /* 写真の左右を背景色へ溶け込ませる。マスクなので下地の色を問わず使える */
 @utility fade-x {
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 30%, black 88%, transparent);
 }
