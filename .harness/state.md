@@ -11,7 +11,7 @@ T-012 視覚突合（続行。NG2回。残差は archive/tasks/T-012.md）
 なし（T-013 で初回リリース完了）
 
 ## 詰まっている点
-なし
+- T-013: Cloudflare 接続・Resend/Turnstile キー・環境変数はユーザー作業待ち。公開 URL が来たら表示確認とフォーム送信テストへ
 
 ## メモ
 - LP参照画像: docs/reference/lp-reference.jpg（V2）
