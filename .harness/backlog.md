@@ -12,4 +12,5 @@ T-011 | L2 | 完了 | GitHub Actions（lint/build/audit）+ OpenNext Cloudflare 
 T-012 | V2 | 完了 | 全体の視覚突合（ui-reviewer）とレスポンシブ最終調整
 T-013 | L2 | 進行中 | Cloudflare Pages 接続・環境変数設定・公開確認
 T-014 | L1 | 完了 | プライバシーポリシーページ /privacy（監査指摘の対応。Resend 米国・30日保存、Turnstile のアクセス情報）
-T-015 | L1 | 進行中 | 初回公開後の文言・リンク修正（tagline / はじめるボタン / HOW I WORK 本文と見出し）
+T-015 | L1 | 完了 | 初回公開後の文言・リンク修正（tagline / はじめるボタン / HOW I WORK 本文と見出し）
+T-016 | L1 | 未着手 | フォーム失敗時に Turnstile をリセット（使用済みトークンによる 403 を防ぐ）
