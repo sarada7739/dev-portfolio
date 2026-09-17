@@ -9,6 +9,6 @@ T-008 | L1 | 完了 | フッター + 問い合わせフォーム UI（Turnstile 
 T-009 | L2 | 完了 | /api/contact Route Handler（zod・Turnstile 検証・Resend 送信）※監査ゲート対象
 T-010 | L1 | 完了 | SEO（metadata・OGP・sitemap・robots）
 T-011 | L2 | 完了 | GitHub Actions（lint/build/audit）+ OpenNext Cloudflare 設定
-T-012 | V2 | 進行中 | 全体の視覚突合（ui-reviewer）とレスポンシブ最終調整
-T-013 | L2 | 次 | Cloudflare Pages 接続・環境変数設定・公開確認
+T-012 | V2 | 完了 | 全体の視覚突合（ui-reviewer）とレスポンシブ最終調整
+T-013 | L2 | 進行中 | Cloudflare Pages 接続・環境変数設定・公開確認
 T-014 | L1 | 完了 | プライバシーポリシーページ /privacy（監査指摘の対応。Resend 米国・30日保存、Turnstile のアクセス情報）

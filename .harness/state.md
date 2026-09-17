@@ -2,7 +2,7 @@
 更新: 2026-09-17
 
 ## 進行中
-T-012 全体の視覚突合（V2 / ui-reviewer → impl-l1 / NG 1回）
+T-012 全体の視覚突合（V2 / ui-reviewer → impl-l1 / NG 2回）
 
 ## 直前に完了
 T-011 CI + OpenNext（続行。NG1回: 冒頭コメント。OpenNext ローカルビルドは Windows 非対応で CI 検証に変更）
