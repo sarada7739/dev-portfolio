@@ -15,4 +15,4 @@ T-014 | L1 | 完了 | プライバシーポリシーページ /privacy（監査�
 T-015 | L1 | 完了 | 初回公開後の文言・リンク修正（tagline / はじめるボタン / HOW I WORK 本文と見出し）
 T-016 | L1 | 未着手 | フォーム失敗時に Turnstile をリセット（使用済みトークンによる 403 を防ぐ）
 T-017 | L1 | 完了 | Nisoine 写真を横に広げ左右フェード
-T-018 | L1 | 進行中 | Nisoine の CSS 製スマホを実機モックアップ画像に差し替え（docs/reference/nisoine/phone-mockup.png 待ち）
+T-018 | L1 | 完了 | Nisoine の CSS 製スマホを実機モックアップ画像に差し替え（docs/reference/nisoine/phone-mockup.png 待ち）
