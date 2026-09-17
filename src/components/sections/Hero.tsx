@@ -9,10 +9,9 @@ export default function Hero() {
     <section className="bg-cream pb-9.25 pt-10">
       <Container>
         <h1 className="text-balance font-serif text-display text-ink">
-          {taglineLines.map((line, index) => (
-            <span key={line}>
+          {taglineLines.map((line) => (
+            <span key={line} className="block">
               {line}
-              {index < taglineLines.length - 1 ? <br /> : null}
             </span>
           ))}
         </h1>
