@@ -6,7 +6,8 @@
     "description": "犬と、？？？？？？。",
     "year": "Steam · 20??",
     "thumbnail": "/images/works/wanwan.jpg",
-    "href": "#"
+    "href": "#",
+    "image": "/images/works/wanwan-full.jpg"
   },
   {
     "slug": "orrery",
@@ -14,7 +15,8 @@
     "description": "対話式AIエージェント。話題の生成しないAI「Jev」を採用、判定は従来の1/3の速さ",
     "year": "Y2026",
     "thumbnail": "/images/works/orrery.jpg",
-    "href": "#"
+    "href": "#",
+    "image": "/images/works/orrery-full.jpg"
   },
   {
     "slug": "shippu",
