@@ -18,3 +18,4 @@ T-017 | L1 | 完了 | Nisoine 写真を横に広げ左右フェード
 T-018 | L1 | 完了 | Nisoine の CSS 製スマホを実機モックアップ画像に差し替え（docs/reference/nisoine/phone-mockup.png 待ち）
 T-019 | L0 | 完了 | 開発中の Steam ゲームをグリッド先頭に追加（Wan Wan 〇〇〇、伏せ字）
 T-020 | L1 | 完了 | 伏せ字カードの演出（〇〇〇を珊瑚色、説明を一部見せる）
+T-021 | L0 | 完了 | Orrery（対話式 AI エージェント）をグリッド2枚目に追加

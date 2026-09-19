@@ -5,7 +5,7 @@
 なし
 
 ## 直前に完了
-T-019/T-020 開発中 Steam ゲーム「Wan Wan 〇〇〇」をグリッド先頭に追加（伏せ字演出。続行、push 済み）
+T-021 Orrery をグリッド2枚目に追加（続行、push 済み）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -18,7 +18,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - 環境変数: Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY
 - Resend 送信元は onboarding@resend.dev。宛先は Resend 登録アドレスのみ可
 - LP参照画像: docs/reference/lp-reference.jpg。Nisoine 実素材: docs/reference/nisoine/
-- 制作物グリッド: 1件目は Steam ゲーム（実素材）、残り7件はプレースホルダ。素材は docs/reference/works/
+- 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery は実素材。残り6件はプレースホルダ。素材は docs/reference/works/
 - OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
 - Fable 5.1 は使わない。impl-ui / ui-reviewer / impl-l4 は general-purpose + model opus で実行
 - サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
