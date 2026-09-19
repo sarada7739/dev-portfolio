@@ -22,7 +22,15 @@ export default function WorkCard({ work }: WorkCardProps) {
         />
       </div>
       <div className="p-4">
-        <h4 className="text-balance font-serif text-h3 text-ink-soft">{work.title}</h4>
+        <h4 className="text-balance font-serif text-h3 text-ink-soft">
+          {work.title}
+          {work.titleMasked ? (
+            <>
+              {" "}
+              <span className="text-coral">{work.titleMasked}</span>
+            </>
+          ) : null}
+        </h4>
         <p className="mt-1 text-small text-gray">{work.description}</p>
         <p className="mt-2 text-caption tracking-wide text-gray-light">{work.year}</p>
       </div>

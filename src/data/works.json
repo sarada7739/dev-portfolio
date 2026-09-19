@@ -1,8 +1,9 @@
 [
   {
     "slug": "wanwan",
-    "title": "Wan Wan 〇〇〇",
-    "description": "？？？？？？",
+    "title": "Wan Wan",
+    "titleMasked": "〇〇〇",
+    "description": "犬と、？？？？？？。",
     "year": "Steam · 20??",
     "thumbnail": "/images/works/wanwan.jpg",
     "href": "#"

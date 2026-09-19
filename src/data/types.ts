@@ -2,6 +2,7 @@
 export type Work = {
   slug: string;
   title: string;
+  titleMasked?: string;
   description: string;
   year: string;
   thumbnail: string;
