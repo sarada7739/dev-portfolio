@@ -9,11 +9,11 @@
     "href": "#"
   },
   {
-    "slug": "mesh-note",
-    "title": "メッシュノート",
-    "description": "ノートを、知識の網に",
-    "year": "Y2025",
-    "thumbnail": "/images/works/mesh-note.svg",
+    "slug": "orrery",
+    "title": "Orrery",
+    "description": "対話式AIエージェント。話題の生成しないAI「Jev」を採用、判定は従来の1/3の速さ",
+    "year": "Y2026",
+    "thumbnail": "/images/works/orrery.jpg",
     "href": "#"
   },
   {
