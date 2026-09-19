@@ -9,7 +9,7 @@ type WorkCardProps = {
   work: Work;
 };
 
-const cardClassName = "block overflow-hidden rounded-card border border-line bg-card shadow-card";
+const cardClassName = "flex flex-col overflow-hidden rounded-card border border-line bg-card shadow-card";
 
 // 「その他の制作物」グリッドのカード1件分。href 未指定はクリックで拡大表示する
 export default function WorkCard({ work }: WorkCardProps) {
