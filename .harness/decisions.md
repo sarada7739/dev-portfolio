@@ -21,3 +21,4 @@
 2026-09-18 | リリース | 初回リリース完了。完成の定義①②③をすべて満たした。公開 URL: https://dev-portfolio.sarada7739.workers.dev | T-013
 2026-09-18 | 運用 | Resend は onboarding@resend.dev のため送信先は Resend 登録アドレスに限定。独自ドメイン認証は次回以降 | T-013
 2026-09-18 | 運用 | Fable 5.1 は使わない（ユーザー指示）。impl-ui / ui-reviewer / impl-l4 は opus で実行 | -
+2026-09-19 | コンテンツ | 開発中の Steam ゲームは「Wan Wan 〇〇〇」と伏せ、説明「犬と、？？？？？？。」年号「Steam · 20??」。伏せ部分は珊瑚色 | T-020
