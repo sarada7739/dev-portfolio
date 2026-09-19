@@ -42,24 +42,26 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
           event.clientY <= rect.bottom;
         if (!inside) dialogRef.current?.close();
       }}
-      className="relative w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-ink/80"
+      className="m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-ink/80"
     >
       <button
         type="button"
         onClick={() => dialogRef.current?.close()}
         aria-label="閉じる"
-        className="absolute right-2 top-2 rounded-pill bg-ink/60 p-2 text-small text-on-navy"
+        className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-pill bg-ink/70 text-body text-on-navy"
       >
         ×
       </button>
-      <div className="relative aspect-thumb max-h-screen w-full">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(min-width: 1024px) 80vw, 100vw"
-          className="object-contain"
-        />
+      <div className="w-full max-h-dvh p-6">
+        <div className="relative aspect-thumb w-full">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(min-width: 1024px) 80vw, 100vw"
+            className="object-contain"
+          />
+        </div>
       </div>
     </dialog>
   );
