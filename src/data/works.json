@@ -19,12 +19,13 @@
     "image": "/images/works/orrery-full.jpg"
   },
   {
-    "slug": "shippu",
-    "title": "しっぷ",
-    "description": "夜の、静かなサウンド",
+    "slug": "hp-support",
+    "title": "ホームページ運用代行サービス",
+    "description": "問い合わせ欄よりご相談",
     "year": "Y2026",
-    "thumbnail": "/images/works/shippu.svg",
-    "href": "#"
+    "thumbnail": "/images/works/hp-support.jpg",
+    "href": "#",
+    "image": "/images/works/hp-support-full.jpg"
   },
   {
     "slug": "pito",
