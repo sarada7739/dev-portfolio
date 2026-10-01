@@ -37,37 +37,5 @@
     "href": "#",
     "image": "/images/works/ai-manager-full.jpg",
     "github": "https://github.com/sarada7739/AI-Manager"
-  },
-  {
-    "slug": "wall",
-    "title": "ウォール",
-    "description": "時間を、視る。",
-    "year": "Y2025",
-    "thumbnail": "/images/works/wall.svg",
-    "href": "#"
-  },
-  {
-    "slug": "aruboa",
-    "title": "アルボア",
-    "description": "書くことで、整理する一日",
-    "year": "Y2026",
-    "thumbnail": "/images/works/aruboa.svg",
-    "href": "#"
-  },
-  {
-    "slug": "mori",
-    "title": "もり",
-    "description": "静かに続く、小さな習慣",
-    "year": "Y2026",
-    "thumbnail": "/images/works/mori.svg",
-    "href": "#"
-  },
-  {
-    "slug": "echo",
-    "title": "エコー",
-    "description": "残す、声の、軌跡。",
-    "year": "Y2026",
-    "thumbnail": "/images/works/echo.svg",
-    "href": "#"
   }
 ]
