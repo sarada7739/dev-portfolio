@@ -8,6 +8,7 @@ export type Work = {
   thumbnail: string;
   href: string;
   image?: string;
+  github?: string;
 };
 
 // Nisoine（主要制作物）セクション

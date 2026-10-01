@@ -30,10 +30,26 @@ export default function WorkCard({ work }: WorkCardProps) {
     </div>
   );
 
+  const titleContent = work.github ? (
+    <a
+      href={work.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:underline"
+    >
+      {work.title}
+      <span aria-hidden="true" className="text-gray-light">
+        {" ↗"}
+      </span>
+    </a>
+  ) : (
+    work.title
+  );
+
   const body = (
     <div className="p-4">
       <h4 className="text-balance font-serif text-h3 text-ink-soft">
-        {work.title}
+        {titleContent}
         {work.titleMasked ? (
           <>
             {" "}
@@ -45,6 +61,35 @@ export default function WorkCard({ work }: WorkCardProps) {
       <p className="mt-2 text-caption tracking-wide text-gray-light">{work.year}</p>
     </div>
   );
+
+  // 入れ子の interactive 要素を避けるため、github 付きはサムネイルだけを button にする
+  if (work.github) {
+    return (
+      <>
+        <div className={cardClassName}>
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={`${work.title} の画像を拡大`}
+            className="block w-full text-left"
+          >
+            {thumbnail}
+          </button>
+          {body}
+        </div>
+        <Lightbox
+          src={work.image ?? work.thumbnail}
+          alt={alt}
+          open={open}
+          onClose={() => {
+            setOpen(false);
+            triggerRef.current?.focus();
+          }}
+        />
+      </>
+    );
+  }
 
   if (!hasLink) {
     return (

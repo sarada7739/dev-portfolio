@@ -16,7 +16,8 @@
     "year": "Y2026",
     "thumbnail": "/images/works/orrery.jpg",
     "href": "#",
-    "image": "/images/works/orrery-full.jpg"
+    "image": "/images/works/orrery-full.jpg",
+    "github": "https://github.com/sarada7739/orrary"
   },
   {
     "slug": "hp-support",
@@ -28,12 +29,14 @@
     "image": "/images/works/hp-support-full.jpg"
   },
   {
-    "slug": "pito",
-    "title": "ぴーと",
-    "description": "書くための、最小の道具",
-    "year": "Y2025",
-    "thumbnail": "/images/works/pito.svg",
-    "href": "#"
+    "slug": "ai-manager",
+    "title": "AI-Manager",
+    "description": "ClaudeとCodexのセッションを一括管理するアプリ",
+    "year": "Y2026",
+    "thumbnail": "/images/works/ai-manager.jpg",
+    "href": "#",
+    "image": "/images/works/ai-manager-full.jpg",
+    "github": "https://github.com/sarada7739/AI-Manager"
   },
   {
     "slug": "wall",
