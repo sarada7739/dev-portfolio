@@ -37,5 +37,15 @@
     "href": "#",
     "image": "/images/works/ai-manager-full.jpg",
     "github": "https://github.com/sarada7739/AI-Manager"
+  },
+  {
+    "slug": "moni-to",
+    "title": "Moni-to",
+    "description": "スマホをWindowsのサブモニターにする無料ソフト",
+    "year": "Y2026",
+    "thumbnail": "/images/works/moni-to.jpg",
+    "href": "#",
+    "image": "/images/works/moni-to-full.jpg",
+    "github": "https://github.com/sarada7739/Moni-to"
   }
 ]
