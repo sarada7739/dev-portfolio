@@ -38,7 +38,6 @@ export type SiteMeta = {
   url: string;
   title: string;
   description: string;
-  name: string;
   tagline: string;
   sub: string;
   author: string;
