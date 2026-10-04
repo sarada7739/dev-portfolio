@@ -1,11 +1,11 @@
 # 現在地
-更新: 2026-10-02
+更新: 2026-10-05
 
 ## 進行中
 なし
 
 ## 直前に完了
-T-027 仮の制作物カード4件を削除（続行・push 済み）
+T-028 Moni-to をグリッド5枚目に追加、GitHub リンク付き（続行・push 済み）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -18,7 +18,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - 環境変数: Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY
 - Resend 送信元は onboarding@resend.dev。宛先は Resend 登録アドレスのみ可
 - LP参照画像: docs/reference/lp-reference.jpg。Nisoine 実素材: docs/reference/nisoine/
-- 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery、3 ホームページ運用代行サービス、4 AI-Manager の4件（すべて実素材）
+- 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery、3 ホームページ運用代行サービス、4 AI-Manager、5 Moni-to の5件（すべて実素材）。GitHub リンクは Orrery / AI-Manager / Moni-to
 - OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
 - Fable 5.1 は使わない。impl-ui / ui-reviewer / impl-l4 は general-purpose + model opus で実行
 - サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
