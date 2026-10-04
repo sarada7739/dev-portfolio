@@ -3,3 +3,8 @@ allowBuilds:
   sharp: false
   unrs-resolver: false
   workerd: true
+
+auditConfig:
+  ignoreGhsas:
+    # braces は修正版なし。lint 時のみ使う開発依存（eslint-config-next 経由）で本番バンドルに含まれない
+    - GHSA-vfj7-8cjw-p6xm
