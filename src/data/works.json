@@ -47,5 +47,15 @@
     "href": "#",
     "image": "/images/works/moni-to-full.jpg",
     "github": "https://github.com/sarada7739/Moni-to"
+  },
+  {
+    "slug": "aa",
+    "title": "てｓｔ",
+    "description": "ああああ",
+    "year": "Y2026",
+    "href": "#",
+    "github": "https://www.youtube.com/",
+    "thumbnail": "/images/works/aa.jpg",
+    "image": "/images/works/aa-full.jpg"
   }
 ]
