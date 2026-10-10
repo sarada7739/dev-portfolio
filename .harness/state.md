@@ -1,11 +1,11 @@
 # 現在地
-更新: 2026-10-05
+更新: 2026-10-10
 
 ## 進行中
 なし
 
 ## 直前に完了
-T-030 タイトル変更・N ロゴ削除（続行・push 済み）。直前に T-029 依存の脆弱性対応
+T-031 制作物のローカル編集ツール（pnpm admin。続行・監査問題なし・push 済み。公開ボタンは未実行）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -21,9 +21,12 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery、3 ホームページ運用代行サービス、4 AI-Manager、5 Moni-to の5件（すべて実素材）。GitHub リンクは Orrery / AI-Manager / Moni-to
 - OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
 - Fable 5.1 は使わない。impl-ui / ui-reviewer / impl-l4 は general-purpose + model opus で実行
+- 制作物の追加はユーザーが `pnpm admin`（tools/admin）で行える。公開ボタンは未 push コミットもまとめて push する
 - サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
 
 ## 次のバックログ候補（未起票）
+- 公開中の仮の値: site.json の email（hi@yourname.dev）/ social の # / SEO description / Hero の author 表記（ユーザー回答待ち）
+- 編集ツール改善: URL の token を replaceState で消す、thumbnail/image の /images/works/ 検証、Windows 予約名 slug の拒否
 - Netlify 移行（name.netlify.app、ユーザー検討中）
 - 「何を」コメント約10か所の削除（第7章の規約違反）
 - 独自ドメイン + Resend ドメイン認証

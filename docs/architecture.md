@@ -74,3 +74,10 @@ docs/
 ## 対応環境
 - モダンブラウザ最新2バージョン（Chrome / Safari / Firefox / Edge）。IE 非対応
 - ブレークポイントはトークン文書で確定（想定: sm 640 / md 768 / lg 1024 / xl 1280）
+
+## ローカル編集ツール（tools/admin）
+- 制作物グリッド（works.json と public/images/works/）を GUI で編集するローカル専用ツール。`pnpm admin` で起動
+- Next.js アプリとは独立した Node 標準モジュールのみのサーバー。本番ビルド・デプロイに一切含めない
+- 127.0.0.1 のみで待ち受け。起動ごとのランダムトークンと Host / Origin 検証で他サイトからの操作を拒否
+- 画像の切り抜き・縮小はブラウザの canvas で行い、サーバーは JPEG を書き込むだけ（sharp 等の追加依存なし）
+- 「公開」は works.json と public/images/works/ だけを commit して main に push（Cloudflare が自動デプロイ）
