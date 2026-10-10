@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "admin": "node tools/admin/server.mjs"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.6.1",
