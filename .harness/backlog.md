@@ -30,3 +30,4 @@ T-029 | L2 | 完了 | 依存パッケージの脆弱性対応（next RCE ほか�
 T-030 | L1 | 完了 | ページタイトル変更とヘッダーの「N」ロゴ削除
 T-031 | L2 | 完了 | 制作物のローカル編集ツール（tools/admin、pnpm admin）
 T-032 | L2 | 完了 | Codex 用ハーネスへの移行と Claude Code 用バックアップ
+T-033 | L0 | 完了 | Codex の視覚レビューに GPT-6.1 Terra の max を指定
