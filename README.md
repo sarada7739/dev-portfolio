@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 開発ハーネス
+
+リポジトリのルートで新しいセッションを開始します。Codex は [AGENTS.md](AGENTS.md) と `.codex/agents/` を使います。Claude Code に戻すときは同じフォルダを Claude Code で開くと、[CLAUDE.md](CLAUDE.md) と `.claude/agents/` が読み込まれます。どちらも [.harness/state.md](.harness/state.md) と [.harness/backlog.md](.harness/backlog.md) から作業を再開します。
+
+移行前の設定とタスク履歴は、ローカルの `.harness/backup/2026-11-12_claude-code-harness.zip` に保存しています。移行前のファイルが必要な場合は、リポジトリのルートで次のコマンドを実行し、展開先から必要なファイルを選んで復元してください。
+
+```powershell
+$harnessRestore = Join-Path ([IO.Path]::GetTempPath()) ("claude-harness-" + [guid]::NewGuid())
+Expand-Archive -LiteralPath '.harness/backup/2026-11-12_claude-code-harness.zip' -DestinationPath $harnessRestore
+Write-Output $harnessRestore
+```
+
+ZIP の `.harness/` は移行前時点の履歴です。通常のツール切り替えでは、現在の `.harness/` をそのまま使います。
+
 ## Getting Started
 
 First, run the development server:

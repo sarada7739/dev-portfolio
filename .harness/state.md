@@ -1,11 +1,11 @@
 # 現在地
-更新: 2026-10-10
+更新: 2026-11-12
 
 ## 進行中
 なし
 
 ## 直前に完了
-T-031 制作物のローカル編集ツール（pnpm admin。続行・監査問題なし・push 済み。公開ボタンは未実行）
+T-032 Codex 用ハーネスへの移行（続行・設定とバックアップの復元を検証済み）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -20,7 +20,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - LP参照画像: docs/reference/lp-reference.jpg。Nisoine 実素材: docs/reference/nisoine/
 - 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery、3 ホームページ運用代行サービス、4 AI-Manager、5 Moni-to の5件（すべて実素材）。GitHub リンクは Orrery / AI-Manager / Moni-to
 - OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
-- Fable 5.1 は使わない。impl-ui / ui-reviewer / impl-l4 は general-purpose + model opus で実行
+- Codex は AGENTS.md と .codex/agents/、Claude Code は CLAUDE.md と .claude/agents/ を使う。状態管理は .harness/ を共有する
 - 制作物の追加はユーザーが `pnpm admin`（tools/admin）で行える。公開ボタンは未 push コミットもまとめて push する
 - サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
 
