@@ -6,6 +6,14 @@ allowBuilds:
   unrs-resolver: false
   workerd: true
 
+overrides:
+  # 上流の指定範囲に glob と minimatch の修正版が含まれていないため
+  '@opennextjs/cloudflare>glob': 14.0.4
+  '@node-minify/core>glob': 14.0.4
+  '@typescript-eslint/typescript-estree>minimatch': 11.0.6
+  # 自動解決される Vitest の Vite ピア依存を修正版に揃えるため
+  'vitest>vite': 8.3.7
+
 auditConfig:
   ignoreGhsas:
     # braces は修正版なし。lint 時のみ使う開発依存（eslint-config-next 経由）で本番バンドルに含まれない
