@@ -4,25 +4,21 @@ import Featured from "@/components/sections/Featured";
 import Works from "@/components/sections/Works";
 import HowIWork from "@/components/sections/HowIWork";
 import Footer from "@/components/sections/Footer";
-import Container from "@/components/ui/Container";
-import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Home() {
   return (
     <>
+      <a href="#works" className="skip-link">
+        制作物へ移動
+      </a>
       <Header />
       <main>
         <Hero />
-        <section id="works" className="bg-cream pb-4.25">
-          <Container>
-            <SectionLabel label="制作物" />
-          </Container>
-        </section>
         <Featured />
         <Works />
         <HowIWork />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }

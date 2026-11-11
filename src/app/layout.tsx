@@ -1,31 +1,11 @@
 import type { Metadata } from "next";
-import {
-  Cormorant_Garamond,
-  Noto_Sans_JP,
-  Shippori_Mincho,
-} from "next/font/google";
+import { Geist } from "next/font/google";
 import { site } from "@/data";
+import ThemeProvider from "@/components/ui/ThemeProvider";
 import "./globals.css";
 
-// 日本語フォントは subsets に japanese が無いため latin を指定し、CJK は unicode-range 分割で配信される
-const serifJp = Shippori_Mincho({
-  variable: "--font-serif-jp",
-  weight: ["500", "600"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const sansJp = Noto_Sans_JP({
-  variable: "--font-sans-jp",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const serifLatin = Cormorant_Garamond({
-  variable: "--font-serif-latin",
-  weight: ["500", "600"],
-  style: ["italic", "normal"],
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 });
@@ -56,11 +36,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="ja"
-      className={`${serifJp.variable} ${sansJp.variable} ${serifLatin.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="ja" className={`${geist.variable} h-full antialiased`}>
+      <body className="min-h-full">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

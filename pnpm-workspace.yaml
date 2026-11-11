@@ -1,4 +1,6 @@
 allowBuilds:
+  # 公開済み成果物を使い、エージェント初期設定の案内だけを出す後処理を省く
+  '@astryxdesign/core': false
   esbuild: true
   sharp: false
   unrs-resolver: false

@@ -4,8 +4,8 @@
 | 領域 | 選定 | 理由 |
 |---|---|---|
 | フレームワーク | Next.js (App Router) | ユーザー指定。フォームAPIを Route Handler で同居させられる |
-| スタイル | Tailwind CSS v4 | デザイントークンを CSS 変数で定義し、参照画像への忠実度を保ちやすい |
-| フォント | next/font（Noto Serif JP / Shippori Mincho 等） | 参照画像のセリフ体を再現。self-host で CLS を防ぐ |
+| スタイル | Tailwind CSS v4 / Astryx | CSS変数で参照画像の配色を管理し、Astryx Buttonをネオン配色で使用する |
+| フォント | next/font（Geist）/ 日本語の端末標準ゴシック | 欧文をself-host、日本語はHiragino / Yu Gothic / Meiryoで表示し、分割フォント読込を省く |
 | ホスティング | Cloudflare Pages + @opennextjs/cloudflare | Nisoine と同じ管理画面。無料枠。Route Handler が Workers 上で動く |
 | メール送信 | Resend | 無料 3,000通/月。API が単純。送信内容を保存しない |
 | スパム対策 | Cloudflare Turnstile | 無料。同一プラットフォームで完結 |
@@ -39,6 +39,15 @@ docs/
 - `docs/design-tokens.md` を唯一の出典とし、`src/app/globals.css` の `@theme` に転記する
 - コンポーネントはトークン（Tailwind クラス）のみ使い、生の px / 色コードをハードコードしない
 - トークン抽出（V2 / impl-ui）→ 個別セクション実装（impl-l1）の順で進める
+
+## 表示と初期アニメーション
+- Astryx の `src/theme/portfolioTheme.ts` に既存CSS変数を参照する12トークンを定義し、公式CLIで生成した `portfolio.js` と `portfolio.css` を読み込む。ThemeProvider は dark に固定する。
+- テーマ更新後は `pnpm dlx @astryxdesign/cli@0.7.13 theme build src/theme/portfolioTheme.ts --out src/theme/portfolio.css` を実行し、生成したJS/CSS/型定義もコミットする。
+- 欧文の Geist は next/font から配信し、日本語は端末標準ゴシックへフォールバックする。日本語の分割フォントとヒーロー画像の帯域競合を避け、外部フォント通信を発生させない。
+- `assemble-in` の CSS アニメーションで各パーツが画面外から集まる。1000ms、遅延0〜600ms。transformのみを変更する。
+- ヒーロー画像は600ms・遅延なしで到着し、ほかのパーツが続いて組み上がる。
+- reduced-motion・キーボードフォーカス・アンカー移動では即時表示。本文の表示はJavaScriptに依存しない。
+- 参照画像は `docs/reference/neon-portfolio.jpg`。装飾ヒーローは `public/images/neon-hero.png`、制作物は既存の実素材を使う。
 
 ## フォームの境界
 ```

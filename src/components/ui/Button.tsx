@@ -1,29 +1,33 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { Button as AstryxButton } from "@astryxdesign/core/Button";
 
 type ButtonProps = {
   href: string;
-  children: ReactNode;
+  children: string;
   arrow?: "↓" | "→";
-  tone?: "dark" | "coral";
+  tone?: "primary" | "secondary";
   external?: boolean;
 };
 
-const toneClass = {
-  dark: "bg-button text-on-navy",
-  coral: "bg-coral text-on-navy",
-};
-
-// 黒ピルボタン。矢印は装飾のため aria-hidden にする
-export default function Button({ href, children, arrow, tone = "dark", external }: ButtonProps) {
+export default function Button({
+  href,
+  children,
+  arrow,
+  tone = "primary",
+  external,
+}: ButtonProps) {
   return (
-    <a
+    <AstryxButton
       href={href}
+      label={children}
+      variant={tone}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className={`inline-flex items-center gap-2 rounded-pill px-6 py-3 text-small ${toneClass[tone]}`}
+      className={`neon-button neon-button-${tone}`}
     >
       <span>{children}</span>
       {arrow ? <span aria-hidden="true">{arrow}</span> : null}
-    </a>
+    </AstryxButton>
   );
 }

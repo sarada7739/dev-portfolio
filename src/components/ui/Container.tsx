@@ -5,13 +5,9 @@ type ContainerProps = {
   className?: string;
 };
 
-// 全セクション共通の横幅制約。中央寄せと左右ガターをここに集約する
-export default function Container({ children, className = "" }: ContainerProps) {
-  return (
-    <div
-      className={`mx-auto box-content max-w-content px-gutter md:px-gutter-md lg:px-gutter-lg ${className}`.trim()}
-    >
-      {children}
-    </div>
-  );
+export default function Container({
+  children,
+  className = "",
+}: ContainerProps) {
+  return <div className={`page-container ${className}`.trim()}>{children}</div>;
 }

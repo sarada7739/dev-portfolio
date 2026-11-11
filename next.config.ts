@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   // next dev が AGENTS.md に nextjs-agent-rules ブロックを自動追記するのを止める
   agentRules: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
 };
 
 export default nextConfig;

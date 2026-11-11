@@ -5,30 +5,32 @@
 なし
 
 ## 直前に完了
-T-033 Codex の視覚レビューモデルを指定（続行・TOML と Terra max の明示起動を確認済み）
+T-034 ネオン配色のポートフォリオと初期表示アニメーション（L2 / V2、reviewer・Terra max 視覚レビュー続行、フォーム技術監査問題なし）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
 
 ## 詰まっている点
-なし
+- 既存依存の監査で critical 2件・high 10件。Next 16.3.8、sharp、zod等の更新が別途必要。Astryx由来の指摘は0。
 
 ## メモ
-- 公開 URL: https://dev-portfolio.sarada7739.workers.dev（GitHub: sarada7739/dev-portfolio, main 自動デプロイ）
-- 環境変数: Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY
-- Resend 送信元は onboarding@resend.dev。宛先は Resend 登録アドレスのみ可
-- LP参照画像: docs/reference/lp-reference.jpg。Nisoine 実素材: docs/reference/nisoine/
-- 制作物グリッド: 1 Wan Wan 〇〇〇、2 Orrery、3 ホームページ運用代行サービス、4 AI-Manager、5 Moni-to の5件（すべて実素材）。GitHub リンクは Orrery / AI-Manager / Moni-to
-- OpenNext ローカルビルドは Windows 非対応（symlink EPERM）。検証は CI と Cloudflare 側
-- Codex は AGENTS.md と .codex/agents/、Claude Code は CLAUDE.md と .claude/agents/ を使う。状態管理は .harness/ を共有する
-- 制作物の追加はユーザーが `pnpm admin`（tools/admin）で行える。公開ボタンは未 push コミットもまとめて push する
-- サブエージェントにプロセス名一括終了（taskkill /IM chrome.exe）を禁止済み
+- ローカル本番プレビューは http://127.0.0.1:3100、PID 20536。終了時はこの起動プロセスを指定する。
+- 公開 URL は https://dev-portfolio.sarada7739.workers.dev（GitHub sarada7739/dev-portfolio、main pushで自動デプロイ）。
+- 新参照は docs/reference/neon-portfolio.jpg。トークンは docs/design-tokens.md。生成ヒーローは public/images/neon-hero.png、生成指示は docs/reference/neon-hero-generation.json。
+- 初期表示は上下左右の画面外から集合。ヒーロー600ms、全体最大1600ms。reduced-motion・フォーカス・アンカー移動は即時表示。
+- 大きなキャッチコピーを置かず、開発についての説明はです・ます調。日本語は端末標準ゴシック、欧文はself-host Geist。
+- Astryx Buttonと事前ビルドの専用テーマを導入。テーマの再生成手順は docs/architecture.md。
+- 最終検証は lint/type/build成功、既存7テスト成功、320/375/390/711/1440pxで横はみ出し0、Lighthouse mobile P91/A100/CLS0。
+- 証跡は docs/reference/shots/t034-check.json、t034-lighthouse.json、t034-after-*.png、t034-entrance.webm。実メール送信は未検証。
+- フォームはcompact Turnstileを近接/フォーカス時に読み込み、検証スキーマを送信時に読み込む。同時送信は同期refロックで抑止する。
+- Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY。Resend送信元は onboarding@resend.dev。
+- Nisoine＋制作物5件は実素材。GitHubリンクは Orrery / AI-Manager / Moni-to。制作物の追加は pnpm admin（tools/admin）で行える。
+- 編集ツールの公開ボタンは未pushコミットもまとめてpushする。
+- WindowsのOpenNextビルドはsymlink権限に制約があり、Cloudflare向けビルド検証はCI側で行う。
+- CodexはAGENTS.mdと.codex/agents/、Claude CodeはCLAUDE.mdと.claude/agents/を使い、.harness/を共有する。
 
 ## 次のバックログ候補（未起票）
-- 公開中の仮の値: site.json の email（hi@yourname.dev）/ social の # / SEO description / Hero の author 表記（ユーザー回答待ち）
-- 編集ツール改善: URL の token を replaceState で消す、thumbnail/image の /images/works/ 検証、Windows 予約名 slug の拒否
-- Netlify 移行（name.netlify.app、ユーザー検討中）
-- 「何を」コメント約10か所の削除（第7章の規約違反）
-- 独自ドメイン + Resend ドメイン認証
-- Nisoine 説明文の「Stripe」下線リンク
-- @types/node を 22 以上へ（vitest 5 の peer 警告）
+- 既存依存のcritical/high監査指摘の解消。
+- site.jsonの仮メール・SNSの#・SEO descriptionの確認。仮SNSと仮メールの宣伝リンクはフッターの表示対象から除外。
+- 編集ツールのURLトークン消去、画像パス検証、Windows予約名slug拒否。
+- Netlify移行、独自ドメインとResendドメイン認証はユーザー検討中。

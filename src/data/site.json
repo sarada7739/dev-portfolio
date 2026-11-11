@@ -5,7 +5,7 @@
   "tagline": "個人製作物、公開しているものを\nまとめております。\nぜひ、ご覧ください。",
   "sub": "個人開発者",
   "author": "Masato Goto",
-  "nav": ["制作物", "一覧", "お問い合わせ"],
+  "nav": ["制作物", "開発について", "お問い合わせ"],
   "email": "hi@yourname.dev",
   "social": [
     { "label": "GitHub", "href": "#" },

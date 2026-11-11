@@ -1,18 +1,20 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { contactSchema, type ContactInput } from "@/lib/contact-schema";
+import type { ContactInput } from "@/lib/contact-schema";
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-// お問い合わせフォーム。送信先 /api/contact は T-009 で実装
 export default function ContactForm() {
   const nameId = useId();
   const emailId = useId();
   const messageId = useId();
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const submittingRef = useRef(false);
+  const [showTurnstile, setShowTurnstile] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,23 +23,46 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
 
+  useEffect(() => {
+    const element = turnstileRef.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowTurnstile(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    const result = contactSchema.safeParse({ name, email, message, turnstileToken });
-    if (!result.success) {
-      const fieldErrors: FieldErrors = {};
-      for (const issue of result.error.issues) {
-        const key = issue.path[0] as keyof ContactInput;
-        if (!fieldErrors[key]) fieldErrors[key] = issue.message;
-      }
-      setErrors(fieldErrors);
-      return;
-    }
-
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setErrors({});
     setStatus("submitting");
     try {
+      const { contactSchema } = await import("@/lib/contact-schema");
+      const result = contactSchema.safeParse({
+        name,
+        email,
+        message,
+        turnstileToken,
+      });
+      if (!result.success) {
+        const fieldErrors: FieldErrors = {};
+        for (const issue of result.error.issues) {
+          const key = issue.path[0] as keyof ContactInput;
+          if (!fieldErrors[key]) fieldErrors[key] = issue.message;
+        }
+        setErrors(fieldErrors);
+        setStatus("idle");
+        return;
+      }
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -46,13 +71,20 @@ export default function ContactForm() {
       setStatus(response.ok ? "success" : "error");
     } catch {
       setStatus("error");
+    } finally {
+      submittingRef.current = false;
     }
   }
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-md">
-      <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
+    <div className="contact-form">
+      <form
+        onSubmit={handleSubmit}
+        onFocusCapture={() => setShowTurnstile(true)}
+        noValidate
+        className="flex flex-col gap-4"
+      >
+        <div className="contact-field">
           <label htmlFor={nameId} className="text-small text-ink-soft">
             お名前
           </label>
@@ -63,10 +95,12 @@ export default function ContactForm() {
             onChange={(event) => setName(event.target.value)}
             className="rounded-card border border-line bg-card px-4 py-2 text-body text-ink focus:border-ink focus:outline-none"
           />
-          {errors.name ? <p className="text-caption text-coral-text">{errors.name}</p> : null}
+          {errors.name ? (
+            <p className="text-caption text-coral-text">{errors.name}</p>
+          ) : null}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="contact-field">
           <label htmlFor={emailId} className="text-small text-ink-soft">
             メールアドレス
           </label>
@@ -77,10 +111,12 @@ export default function ContactForm() {
             onChange={(event) => setEmail(event.target.value)}
             className="rounded-card border border-line bg-card px-4 py-2 text-body text-ink focus:border-ink focus:outline-none"
           />
-          {errors.email ? <p className="text-caption text-coral-text">{errors.email}</p> : null}
+          {errors.email ? (
+            <p className="text-caption text-coral-text">{errors.email}</p>
+          ) : null}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="contact-field">
           <label htmlFor={messageId} className="text-small text-ink-soft">
             本文
           </label>
@@ -91,30 +127,41 @@ export default function ContactForm() {
             onChange={(event) => setMessage(event.target.value)}
             className="rounded-card border border-line bg-card px-4 py-2 text-body text-ink focus:border-ink focus:outline-none"
           />
-          {errors.message ? <p className="text-caption text-coral-text">{errors.message}</p> : null}
+          {errors.message ? (
+            <p className="text-caption text-coral-text">{errors.message}</p>
+          ) : null}
         </div>
 
         <div>
-          <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
-            onSuccess={setTurnstileToken}
-            onExpire={() => setTurnstileToken("")}
-          />
+          <div ref={turnstileRef} className="turnstile-slot">
+            {showTurnstile ? (
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
+                options={{ size: "compact" }}
+                onSuccess={setTurnstileToken}
+                onExpire={() => setTurnstileToken("")}
+              />
+            ) : null}
+          </div>
           {errors.turnstileToken ? (
-            <p className="mt-1 text-caption text-coral-text">{errors.turnstileToken}</p>
+            <p className="mt-1 text-caption text-coral-text">
+              {errors.turnstileToken}
+            </p>
           ) : null}
         </div>
 
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center gap-2 rounded-pill bg-button px-6 py-3 text-small text-on-navy disabled:opacity-50"
+          className="neon-button neon-button-primary"
         >
           送信する
         </button>
 
         {status === "success" ? (
-          <p className="text-small text-ink">送信しました。返信をお待ちください。</p>
+          <p className="text-small text-ink">
+            送信しました。返信をお待ちください。
+          </p>
         ) : null}
         {status === "error" ? (
           <p className="text-small text-coral-text">
@@ -123,9 +170,9 @@ export default function ContactForm() {
         ) : null}
       </form>
 
-      <p className="mt-4 text-caption text-gray">
-        いただいた情報は返信のためにのみ使用し、それ以外の目的には使いません。送信時に Cloudflare
-        Turnstile と Resend を利用します。詳しくは
+      <p className="privacy-notice">
+        いただいた情報は返信のためにのみ使用し、それ以外の目的には使いません。送信時に
+        Cloudflare Turnstile と Resend を利用します。詳しくは
         <Link href="/privacy">プライバシーポリシー</Link>
         をご覧ください。
       </p>

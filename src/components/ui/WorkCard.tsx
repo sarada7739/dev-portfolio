@@ -9,9 +9,8 @@ type WorkCardProps = {
   work: Work;
 };
 
-const cardClassName = "flex flex-col overflow-hidden rounded-card border border-line bg-card shadow-card";
+const cardClassName = "work-card";
 
-// 「その他の制作物」グリッドのカード1件分。href 未指定はクリックで拡大表示する
 export default function WorkCard({ work }: WorkCardProps) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -19,12 +18,12 @@ export default function WorkCard({ work }: WorkCardProps) {
   const alt = `${work.title} のサムネイル`;
 
   const thumbnail = (
-    <div className="relative aspect-thumb w-full overflow-hidden rounded-t-card">
+    <div className="work-thumbnail">
       <Image
         src={work.thumbnail}
         alt={alt}
         fill
-        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+        sizes="(min-width: 1280px) 380px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         className="object-cover"
       />
     </div>
@@ -47,8 +46,8 @@ export default function WorkCard({ work }: WorkCardProps) {
   );
 
   const body = (
-    <div className="p-4">
-      <h4 className="text-balance font-serif text-h3 text-ink-soft">
+    <div className="work-body">
+      <h3>
         {titleContent}
         {work.titleMasked ? (
           <>
@@ -56,9 +55,14 @@ export default function WorkCard({ work }: WorkCardProps) {
             <span className="text-coral">{work.titleMasked}</span>
           </>
         ) : null}
-      </h4>
-      <p className="mt-1 text-small text-gray">{work.description}</p>
-      <p className="mt-2 text-caption tracking-wide text-gray-light">{work.year}</p>
+      </h3>
+      <p className="work-description">{work.description}</p>
+      <div className="work-meta">
+        <span>{work.year}</span>
+        <span aria-hidden="true" className="work-arrow">
+          ↗
+        </span>
+      </div>
     </div>
   );
 
@@ -98,7 +102,7 @@ export default function WorkCard({ work }: WorkCardProps) {
           ref={triggerRef}
           type="button"
           onClick={() => setOpen(true)}
-          className={`${cardClassName} w-full text-left`}
+          className={cardClassName}
         >
           {thumbnail}
           {body}

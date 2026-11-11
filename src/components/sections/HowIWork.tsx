@@ -1,46 +1,39 @@
 import Container from "@/components/ui/Container";
-import SectionLabel from "@/components/ui/SectionLabel";
-import Marker from "@/components/ui/Marker";
-import { howIWork } from "@/data";
+import { howIWork, featured } from "@/data";
 
-// 紺地の HOW I WORK ブロック。星空は @theme の bg-stars トークンで描く
+const symbols = ["✧", "◇", "/", "+"];
+
 export default function HowIWork() {
   return (
-    <section
-      id="how-i-work"
-      className="relative isolate overflow-hidden border-y-accent border-coral-line bg-linear-to-b from-navy-light to-navy-deep pb-7 pt-11.75"
-    >
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-stars" />
+    <section id="how-i-work" className="section about-section">
       <Container>
-        <SectionLabel label="HOW I WORK" tone="onNavy" />
-        <h2 className="text-balance mt-6.5 text-center font-serif text-h1 text-on-navy">
-          <span className="font-display italic">AI</span>を、相棒に
-        </h2>
-        <div className="mt-9.5 flex flex-col gap-4">
-          {howIWork.map((item) => (
-            <div
+        <div className="section-heading assemble from-left delay-3">
+          <h2>開発について</h2>
+        </div>
+        <div className="approach-grid">
+          {howIWork.map((item, index) => (
+            <article
               key={item.label}
-              className="flex flex-col gap-3 rounded-panel border border-navy-border bg-navy-card px-10 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+              className={`approach-card glass-panel assemble from-bottom delay-${index + 2}`}
             >
-              <div className="flex items-start gap-4 sm:gap-12">
-                <Marker shape={item.marker} color={item.markerColor} />
-                <div>
-                  <p className="text-balance text-h3 font-bold text-on-navy">{item.title}</p>
-                  <p className="mt-1 text-small text-on-navy-muted">
-                    {item.body.split("\n").map((line, index, lines) => (
-                      <span key={line}>
-                        {line}
-                        {index < lines.length - 1 ? <br /> : null}
-                      </span>
-                    ))}
-                  </p>
-                </div>
-              </div>
-              <p className="pl-9 text-caption tracking-wide text-on-navy-muted sm:pl-0">
-                {item.label}
-              </p>
-            </div>
+              <span className="approach-symbol" aria-hidden="true">
+                {symbols[index]}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
           ))}
+        </div>
+        <div className="technology-section assemble from-right delay-5">
+          <div className="section-heading">
+            <h2>使用技術</h2>
+            <span className="section-note">プロジェクトで使用している技術</span>
+          </div>
+          <ul className="technology-list">
+            {featured.tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>

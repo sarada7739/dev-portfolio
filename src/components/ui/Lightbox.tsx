@@ -10,7 +10,6 @@ type LightboxProps = {
   onClose: () => void;
 };
 
-// ネイティブ dialog の showModal/close で開閉する。フォーカス復帰は close イベント任せ
 export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -42,13 +41,13 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
           event.clientY <= rect.bottom;
         if (!inside) dialogRef.current?.close();
       }}
-      className="m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-ink/80"
+      className="m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-navy-deep/90"
     >
       <button
         type="button"
         onClick={() => dialogRef.current?.close()}
         aria-label="閉じる"
-        className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-pill bg-ink/70 text-body text-on-navy"
+        className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-pill border border-navy-border bg-navy-light text-body text-on-navy"
       >
         ×
       </button>

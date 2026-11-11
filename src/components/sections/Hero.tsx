@@ -1,26 +1,42 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { site } from "@/data";
 
 export default function Hero() {
-  const taglineLines = site.tagline.split("\n");
-
   return (
-    <section className="bg-cream pb-9.25 pt-10">
-      <Container>
-        <h1 className="text-balance font-serif text-display text-ink">
-          {taglineLines.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-        </h1>
-        <p className="mt-7 text-lead text-ink-soft">{site.sub}</p>
-        <p className="text-small tracking-wide text-ink-soft">{site.author}</p>
-        <div className="mt-7">
-          <Button href="#works" arrow="↓">
-            制作物を見る
-          </Button>
+    <section id="top" className="hero">
+      <Container className="hero-grid">
+        <div className="hero-copy assemble from-left delay-1">
+          <p className="eyebrow">個人開発ポートフォリオ</p>
+          <h1 className="sr-only">sarada7739 の個人開発ポートフォリオ</h1>
+          <p className="hero-intro">
+            <span className="text-chunk">Webアプリ、</span>
+            <span className="text-chunk">モバイルアプリ、</span>
+            <br />
+            <span className="text-chunk">Steam向けゲーム。</span>
+          </p>
+          <p className="hero-description">
+            企画から実装まで、個人で開発しています。
+          </p>
+          <div className="hero-actions">
+            <Button href="#works" arrow="↓">
+              制作物を見る
+            </Button>
+            <Button href="#contact" tone="secondary" arrow="→">
+              お問い合わせ
+            </Button>
+          </div>
+        </div>
+        <div className="hero-visual assemble from-right" aria-hidden="true">
+          <Image
+            src="/images/neon-hero.png"
+            alt=""
+            width={1536}
+            height={1024}
+            priority
+            fetchPriority="high"
+            sizes="(min-width: 1296px) 796px, (min-width: 1024px) calc(66.3vw - 64px), (min-width: 768px) calc(62.5vw - 40px), (min-width: 584px) 544px, calc(100vw - 40px)"
+          />
         </div>
       </Container>
     </section>
