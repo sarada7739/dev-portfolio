@@ -5,7 +5,7 @@
 なし
 
 ## 直前に完了
-T-035 依存監査の指摘26件を解消（L2、全重大度0件、reviewer 続行、技術監査問題なし）
+T-036 FieldSprigの制作物カードを追加（L1、reviewer 続行、PC・スマホの表示と画像拡大を確認）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -25,7 +25,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - 証跡は docs/reference/shots/t034-check.json、t034-lighthouse.json、t034-after-*.png、t034-entrance.webm。実メール送信は未検証。
 - フォームはcompact Turnstileを近接/フォーカス時に読み込み、検証スキーマを送信時に読み込む。同時送信は同期refロックで抑止する。
 - Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY。Resend送信元は onboarding@resend.dev。
-- Nisoine＋制作物5件は実素材。GitHubリンクは Orrery / AI-Manager / Moni-to。制作物の追加は pnpm admin（tools/admin）で行える。
+- Nisoine＋制作物6件は実素材。FieldSprigは開発中のUnity実画面を使用。GitHubリンクは Orrery / AI-Manager / Moni-to。制作物の追加は pnpm admin（tools/admin）で行える。
 - 編集ツールの公開ボタンは未pushコミットもまとめてpushする。
 - WindowsのOpenNextビルドはsymlink権限に制約があり、Cloudflare向けビルド検証はCI側で行う。
 - CodexはAGENTS.mdと.codex/agents/、Claude CodeはCLAUDE.mdと.claude/agents/を使い、.harness/を共有する。

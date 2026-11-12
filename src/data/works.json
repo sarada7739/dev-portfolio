@@ -47,5 +47,14 @@
     "href": "#",
     "image": "/images/works/moni-to-full.jpg",
     "github": "https://github.com/sarada7739/Moni-to"
+  },
+  {
+    "slug": "fieldsprig",
+    "title": "FieldSprig",
+    "description": "Unity 6向けの3Dワールド自動生成ツール。地形・湖・道路・植生をシードから再現し、必要な区画だけ再生成できます。",
+    "year": "2026 · 開発中",
+    "thumbnail": "/images/works/fieldsprig.jpg",
+    "href": "#",
+    "image": "/images/works/fieldsprig-full.jpg"
   }
 ]
