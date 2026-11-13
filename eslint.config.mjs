@@ -12,7 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // OpenNext Cloudflare のビルド出力。生成物なので lint 対象外
+    // OpenNext Cloudflare のビルドで生成されるファイルを lint の対象から外す
     ".open-next/**",
     ".wrangler/**",
   ]),

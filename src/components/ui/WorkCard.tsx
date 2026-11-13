@@ -66,7 +66,7 @@ export default function WorkCard({ work }: WorkCardProps) {
     </div>
   );
 
-  // 入れ子の interactive 要素を避けるため、github 付きはサムネイルだけを button にする
+  // GitHub へのリンクがボタンの中に入らないよう、サムネイルだけをボタンにする
   if (work.github) {
     return (
       <>

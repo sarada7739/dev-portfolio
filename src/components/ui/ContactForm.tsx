@@ -160,18 +160,18 @@ export default function ContactForm() {
 
         {status === "success" ? (
           <p className="text-small text-ink">
-            送信しました。返信をお待ちください。
+            お問い合わせを送信しました。返信をお待ちください。
           </p>
         ) : null}
         {status === "error" ? (
           <p className="text-small text-coral-text">
-            送信できませんでした。時間をおいて再度お試しください。
+            送信できませんでした。時間をおいて、もう一度お試しください。
           </p>
         ) : null}
       </form>
 
       <p className="privacy-notice">
-        いただいた情報は返信のためにのみ使用し、それ以外の目的には使いません。送信時に
+        いただいた情報はお問い合わせへの返信にのみ使用します。送信時に
         Cloudflare Turnstile と Resend を利用します。詳しくは
         <Link href="/privacy">プライバシーポリシー</Link>
         をご覧ください。

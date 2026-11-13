@@ -16,7 +16,7 @@ export default function Hero() {
             <span className="text-chunk">Steam向けゲーム。</span>
           </p>
           <p className="hero-description">
-            企画から実装まで、個人で開発しています。
+            企画から実装まで個人で開発しています。
           </p>
           <div className="hero-actions">
             <Button href="#works" arrow="↓">

@@ -15,7 +15,7 @@ const TEXT_COLOR: Record<SectionLabelTone, string> = {
   onNavy: "text-on-navy-muted",
 };
 
-// 「— ラベル —」形式のセクション見出しラベル。tone="onNavy" で紺地用の配色にする
+// 両側に線を添える見出しラベル。紺地では tone="onNavy" を指定する
 export default function SectionLabel({ label, tone = "default" }: SectionLabelProps) {
   return (
     <div className="flex items-center justify-center gap-3">

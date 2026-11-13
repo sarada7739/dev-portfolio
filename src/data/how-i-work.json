@@ -1,14 +1,14 @@
 [
   {
     "title": "AIを開発に活かす",
-    "body": "アイデア出しから実装まで、AIツールを活用します。",
+    "body": "アイデア出しから実装までAIツールを活用します。",
     "label": "Tools",
     "marker": "circle",
     "markerColor": "coral"
   },
   {
     "title": "複数の視点で確認する",
-    "body": "レビューを重ね、品質を確かめます。",
+    "body": "レビューを重ねて品質を確かめます。",
     "label": "Agents",
     "marker": "triangle",
     "markerColor": "amber"
@@ -22,7 +22,7 @@
   },
   {
     "title": "細部を整える",
-    "body": "文字、余白、操作感まで、自分の目で確認します。",
+    "body": "文字や余白を自分の目で確認し、操作感も自分で確かめます。",
     "label": "Craft",
     "marker": "dot",
     "markerColor": "sage"

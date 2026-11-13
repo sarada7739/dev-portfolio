@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// クライアント・サーバー共通のお問い合わせフォーム検証スキーマ
+// クライアントとサーバーで同じ条件を使ってお問い合わせフォームの入力を検証する
 export const contactSchema = z.object({
   name: z
     .string()

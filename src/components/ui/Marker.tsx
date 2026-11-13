@@ -19,7 +19,7 @@ const MARKER_FILL: Record<HowIWorkItem["markerColor"], string> = {
   sage: "fill-marker-sage",
 };
 
-// HOW I WORK カードのマーカー。triangle だけ塗りは SVG、他は div で描く
+// 「開発について」のマーカー。三角形は SVG で、ほかの形は span の背景色で描く
 export default function Marker({ shape, color }: MarkerProps) {
   if (shape === "triangle") {
     return (

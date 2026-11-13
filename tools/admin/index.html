@@ -13,7 +13,7 @@
       <h1>制作物エディタ</h1>
       <div class="bar-actions">
         <button type="button" id="btn-add">カードを追加</button>
-        <button type="button" id="btn-publish" class="primary">公開（commit &amp; push）</button>
+        <button type="button" id="btn-publish" class="primary">公開（コミットしてプッシュ）</button>
       </div>
     </header>
 
@@ -39,17 +39,17 @@
           <label>GitHub URL（任意）
             <input type="url" id="f-github" placeholder="https://github.com/..." maxlength="500" />
           </label>
-          <label>リンク URL（任意・空なら &quot;#&quot;）
+          <label>リンク URL（任意。空欄の場合は &quot;#&quot;）
             <input type="url" id="f-href" placeholder="https://..." maxlength="500" />
           </label>
-          <label>slug（画像ファイル名に使用）
+          <label>slug（画像のファイル名に使います）
             <input type="text" id="f-slug" required maxlength="64" />
           </label>
 
           <fieldset>
-            <legend>画像（5:3 に切り抜き）</legend>
+            <legend>画像（切り抜きの比率は 5:3）</legend>
             <div id="drop" class="drop" tabindex="0">
-              ここに画像（png / jpg / webp）をドラッグ&amp;ドロップ、またはクリックして選択
+              画像（png / jpg / webp）をここにドラッグ&amp;ドロップするか、クリックして選んでください。
               <input type="file" id="f-file" accept="image/png,image/jpeg,image/webp" hidden />
             </div>
             <p id="image-note" class="note"></p>

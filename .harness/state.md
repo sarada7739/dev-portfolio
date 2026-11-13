@@ -1,11 +1,11 @@
 # 現在地
-更新: 2026-11-12
+更新: 2026-11-13
 
 ## 進行中
 なし
 
 ## 直前に完了
-T-036 FieldSprigの制作物カードを追加（L1、reviewer 続行、PC・スマホの表示と画像拡大を確認）
+T-037 ポートフォリオと編集ツールの日本語を推敲（L2、reviewer 続行、最終稿26ファイル照合・lint・型検査・テスト7件・本番ビルドを確認）
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）
@@ -31,6 +31,6 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）
 - CodexはAGENTS.mdと.codex/agents/、Claude CodeはCLAUDE.mdと.claude/agents/を使い、.harness/を共有する。
 
 ## 次のバックログ候補（未起票）
-- site.jsonの仮メール・SNSの#・SEO descriptionの確認。仮SNSと仮メールの宣伝リンクはフッターの表示対象から除外。
+- site.jsonの仮メールとSNSの#の確認。仮SNSと仮メールの宣伝リンクはフッターの表示対象から除外。
 - 編集ツールのURLトークン消去、画像パス検証、Windows予約名slug拒否。
 - Netlify移行、独自ドメインとResendドメイン認証はユーザー検討中。

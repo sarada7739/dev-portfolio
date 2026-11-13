@@ -1,4 +1,4 @@
-// 「その他の制作物」グリッドのカード1件分
+// 「その他の制作物」に表示するカード1件分のデータ
 export type Work = {
   slug: string;
   title: string;
@@ -11,7 +11,7 @@ export type Work = {
   github?: string;
 };
 
-// Nisoine（主要制作物）セクション
+// 主要な制作物として紹介する Nisoine のデータ
 export type Featured = {
   label: string;
   heading: string;
@@ -24,7 +24,7 @@ export type Featured = {
   phoneFrame: string;
 };
 
-// HOW I WORK の1項目
+// 「開発について」に表示する1項目分のデータ
 export type HowIWorkItem = {
   title: string;
   body: string;
@@ -33,7 +33,7 @@ export type HowIWorkItem = {
   markerColor: "coral" | "amber" | "green" | "sage";
 };
 
-// サイト共通のメタ情報（ヘッダー・フッター・SEO metadata で参照）
+// ヘッダー、フッター、検索用メタデータで参照するサイト共通の情報
 export type SiteMeta = {
   url: string;
   title: string;

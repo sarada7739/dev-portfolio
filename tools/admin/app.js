@@ -40,10 +40,10 @@ const els = {
 };
 
 let works = [];
-let editingIndex = -1; // -1 は新規追加
+let editingIndex = -1; // カードの追加時は編集中のカードがないため -1 を使う
 let slugTouched = false;
 let objectUrls = [];
-// 切り抜き状態。座標はすべて元画像のピクセル単位
+// 表示倍率に左右されないよう、切り抜きの座標は元画像のピクセル単位で保持する
 let img = null;
 let crop = null;
 let scale = 1;
@@ -62,7 +62,7 @@ async function api(path, options = {}) {
     try {
       message = (await res.json()).error ?? message;
     } catch {
-      // 本文が JSON でなければステータスのみ表示する
+      // エラーの詳細を JSON から読めなければ、HTTP ステータスコードだけを表示する
     }
     throw new Error(message);
   }
@@ -92,7 +92,7 @@ async function thumbUrl(ref) {
     objectUrls.push(url);
     return url;
   } catch {
-    // 画像が無いカードでも一覧は表示したいので空にする
+    // サムネイルを取得できなくても、カードは一覧に表示する
     return "";
   }
 }
@@ -132,10 +132,10 @@ async function renderList() {
     buttons.className = "work-buttons";
     const up = button("↑", () => move(i, -1));
     up.disabled = i === 0;
-    up.setAttribute("aria-label", `${w.title} を上へ`);
+    up.setAttribute("aria-label", `${w.title} を上に移動`);
     const down = button("↓", () => move(i, 1));
     down.disabled = i === works.length - 1;
-    down.setAttribute("aria-label", `${w.title} を下へ`);
+    down.setAttribute("aria-label", `${w.title} を下に移動`);
     buttons.append(up, down, button("編集", () => openForm(i)), button("削除", () => remove(i), "danger"));
 
     li.append(image, info, buttons);
@@ -149,7 +149,7 @@ async function move(index, delta) {
   [next[index], next[target]] = [next[target], next[index]];
   try {
     await saveWorks(next);
-    setStatus("並べ替えを保存しました（公開するまでサイトには反映されません）");
+    setStatus("並べ替えを保存しました。公開するまでサイトには反映されません。");
   } catch (e) {
     setStatus(`並べ替えに失敗しました: ${e.message}`, true);
   }
@@ -157,10 +157,10 @@ async function move(index, delta) {
 
 async function remove(index) {
   const w = works[index];
-  if (!confirm(`「${w.title}」を削除します。他のカードが使っていない画像ファイルも削除されます。よろしいですか？`)) return;
+  if (!confirm(`「${w.title}」を削除します。このカードの画像ファイルのうち、他のカードで使っていないものも削除されます。よろしいですか？`)) return;
   try {
     await saveWorks(works.filter((_, i) => i !== index));
-    setStatus(`「${w.title}」を削除しました（公開するまでサイトには反映されません）`);
+    setStatus(`「${w.title}」を削除しました。公開するまでサイトには反映されません。`);
   } catch (e) {
     setStatus(`削除に失敗しました: ${e.message}`, true);
   }
@@ -198,7 +198,7 @@ function openForm(index) {
   els.href.value = w && w.href !== "#" ? w.href : "";
   els.slug.value = w?.slug ?? "";
   slugTouched = Boolean(w);
-  els.imageNote.textContent = w ? "画像を差し替えない場合は、いまの画像がそのまま使われます。" : "新規カードには画像が必要です。";
+  els.imageNote.textContent = w ? "画像を差し替えない場合は、いまの画像を使います。" : "カードを追加するには画像が必要です。";
   resetImage();
   setStatus("");
   show("form");
@@ -283,7 +283,7 @@ function startDrag(e, corner) {
       crop.x = Math.min(Math.max(origin.x + p.x - start.x, 0), nw - origin.w);
       crop.y = Math.min(Math.max(origin.y + p.y - start.y, 0), nh - origin.w * RATIO);
     } else {
-      // 反対側の角を固定し、5:3 を保ったまま大きさだけ変える
+      // 枠の反対側の角を固定し、5:3 の比率を保ったまま拡大・縮小する
       const sx = corner.includes("e") ? 1 : -1;
       const sy = corner.includes("s") ? 1 : -1;
       const ax = sx > 0 ? origin.x : origin.x + origin.w;
@@ -332,7 +332,7 @@ function renderCanvas(sw, sh, sx, sy, dw, dh) {
   canvas.width = dw;
   canvas.height = dh;
   const ctx = canvas.getContext("2d");
-  // 透過 PNG を JPEG にしたとき背景が黒くならないようにする
+  // 透過 PNG を JPEG に変換したとき、透明な部分が黒くならないよう白い下地を敷く
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, dw, dh);
   ctx.drawImage(img, sx, sy, sw, sh, 0, 0, dw, dh);
@@ -369,10 +369,10 @@ async function submitForm(e) {
 
   if (!title) return setStatus("タイトルを入力してください", true);
   if (!SLUG_RE.test(slug) || slug.endsWith("-full")) {
-    return setStatus("slug は英小文字・数字・ハイフンのみで、末尾を -full にはできません", true);
+    return setStatus("slug には英小文字、数字、ハイフンだけを使えます。末尾に -full は使えません", true);
   }
   if (works.some((w, i) => i !== editingIndex && w.slug === slug)) return setStatus("その slug は既に使われています", true);
-  if (!isAllowedUrl(github) || !isAllowedUrl(href)) return setStatus("URL は空欄か https:// から始まる形式にしてください", true);
+  if (!isAllowedUrl(github) || !isAllowedUrl(href)) return setStatus("URL を入力する場合は https:// から始めてください", true);
   if (isNew && !img) return setStatus("画像を選んでください", true);
 
   const card = { ...(isNew ? {} : works[editingIndex]) };
@@ -397,14 +397,14 @@ async function submitForm(e) {
     else next[editingIndex] = card;
     await saveWorks(next);
     closeForm();
-    setStatus(`「${title}」を保存しました（公開するまでサイトには反映されません）`);
+    setStatus(`「${title}」を保存しました。公開するまでサイトには反映されません。`);
   } catch (err) {
     setStatus(`保存に失敗しました: ${err.message}`, true);
   }
 }
 
 async function publish() {
-  if (!confirm("works.json と画像を commit して main に push します。公開してよいですか？")) return;
+  if (!confirm("works.json と画像の変更をコミットし、main にプッシュします。公開してよいですか？")) return;
   const btn = $("btn-publish");
   btn.disabled = true;
   setStatus("公開中です…");

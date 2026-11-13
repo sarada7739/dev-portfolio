@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="site-header assemble from-top">
       <Container className="header-inner">
-        <a href="#top" className="brand" aria-label="sarada7739 トップへ">
+        <a href="#top" className="brand" aria-label="sarada7739 のページ先頭へ">
           <span className="brand-symbol" aria-hidden="true">
             /
           </span>

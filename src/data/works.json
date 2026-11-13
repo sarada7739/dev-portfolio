@@ -12,7 +12,7 @@
   {
     "slug": "orrery",
     "title": "Orrery",
-    "description": "対話式AIエージェント。話題の生成しないAI「Jev」を採用、判定は従来の1/3の速さ",
+    "description": "対話式AIエージェント。話題を生成しないAI「Jev」を採用しており、判定は従来の1/3の速さです。",
     "year": "Y2026",
     "thumbnail": "/images/works/orrery.jpg",
     "href": "#",
@@ -22,7 +22,7 @@
   {
     "slug": "hp-support",
     "title": "ホームページ運用代行サービス",
-    "description": "問い合わせ欄よりご相談",
+    "description": "お問い合わせ欄からご相談ください",
     "year": "Y2026",
     "thumbnail": "/images/works/hp-support.jpg",
     "href": "#",

@@ -1,7 +1,7 @@
 import { defineConfig } from "vitest/config";
 import path from "node:path";
 
-// tsconfig の @/* エイリアスに合わせる
+// テストでも tsconfig と同じ @/* エイリアスでモジュールを参照できるようにする
 export default defineConfig({
   test: {
     environment: "node",

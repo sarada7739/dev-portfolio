@@ -17,7 +17,7 @@ const BASE_PORT = 4319;
 const MAX_PORT_TRIES = 20;
 const MAX_BODY = 20 * 1024 * 1024;
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-// 画像ファイル名として許可する形。ドットで始まる名前やパス区切りを排除する
+// 画像ファイル名には先頭のドットとパス区切りを許可しない
 const IMG_FILE_RE = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 const MAX_STR = 2000;
 
@@ -36,7 +36,7 @@ class HttpError extends Error {
 
 let port = BASE_PORT;
 
-// works.json と画像の書き込み・git 操作が交差しないよう直列化する
+// works.json や画像の書き込みと Git 操作が重ならないよう順番に実行する
 let queue = Promise.resolve();
 function serialize(task) {
   const run = queue.then(task, task);
@@ -104,19 +104,19 @@ async function readJsonBody(req) {
   try {
     return JSON.parse(raw.toString("utf8"));
   } catch {
-    throw new HttpError(400, "JSON を解釈できません");
+    throw new HttpError(400, "JSON の形式が正しくありません");
   }
 }
 
 function assertSlug(slug) {
   if (typeof slug !== "string" || slug.length > 64 || !SLUG_RE.test(slug)) {
-    throw new HttpError(400, "slug は英小文字・数字・ハイフンのみ（先頭末尾・連続ハイフン不可）です");
+    throw new HttpError(400, "slug には英小文字、数字、ハイフンだけを使えます。ハイフンは先頭と末尾に置けず、連続して使えません");
   }
   // <slug>-full.jpg が別カードのサムネイルと衝突するのを防ぐ
   if (slug.endsWith("-full")) throw new HttpError(400, "slug の末尾に -full は使えません");
 }
 
-// slug 等から組み立てたファイル名を IMG_DIR 配下に閉じ込める
+// slug などから組み立てたパスが IMG_DIR の外を指さないようにする
 function imagePath(fileName) {
   if (!IMG_FILE_RE.test(fileName)) throw new HttpError(400, "画像ファイル名が不正です");
   const resolved = path.resolve(IMG_DIR, fileName);
@@ -124,7 +124,7 @@ function imagePath(fileName) {
   return resolved;
 }
 
-// "/images/works/foo.jpg" 形式の参照だけをファイル名にする。それ以外は null
+// "/images/works/foo.jpg" 形式の参照だけをファイル名に変換し、それ以外は null を返す
 function imageFileFromRef(ref) {
   if (typeof ref !== "string" || !ref.startsWith(IMG_URL_PREFIX)) return null;
   const name = ref.slice(IMG_URL_PREFIX.length);
@@ -176,7 +176,7 @@ function validateWorks(works) {
     if (w.title.trim() === "") throw new HttpError(400, `${label}: title が空です`);
     for (const key of ["href", "github"]) {
       if (w[key] !== undefined && !isAllowedUrl(w[key])) {
-        throw new HttpError(400, `${label}: ${key} は空・"#"・https:// のいずれかにしてください`);
+        throw new HttpError(400, `${label}: ${key} は空文字列、"#"、https:// で始まる URL のいずれかにしてください`);
       }
     }
   });
@@ -196,7 +196,7 @@ function referencedImages(works) {
 async function saveWorks(works) {
   validateWorks(works);
   const { text: oldText, works: oldWorks } = await readWorksFile();
-  // 既存ファイルの改行コードに合わせ、不要な差分を出さない
+  // 改行コードだけの差分を避けるため、既存ファイルと同じ改行コードを使う
   const eol = oldText.includes("\r\n") ? "\r\n" : "\n";
   const body = JSON.stringify(works, null, 2).replace(/\n/g, eol) + eol;
   await writeFile(WORKS_JSON, body, "utf8");
@@ -262,7 +262,7 @@ async function summarizeChange() {
     try {
       before = JSON.parse(head.stdout);
     } catch {
-      // HEAD 側が解釈できなければ要約は汎用文言に落とす
+      // HEAD の works.json を JSON として読めなければ、定型のコミット件名を使う
       return "works: update";
     }
   }
@@ -301,7 +301,7 @@ async function publish() {
 
   const message = await summarizeChange();
   const logs = [];
-  // 新規画像は add しないと pathspec 付き commit の対象にならない
+  // 新規画像をパス指定付きのコミットに含めるには、先に git add が必要
   const steps = [
     ["add", "-A", "--", ...paths],
     ["commit", "-m", message, "--", ...paths],
@@ -348,7 +348,7 @@ async function handle(req, res) {
     return;
   }
 
-  // 静的ファイルは秘密を含まないため Host / Origin 検証のみで配信する
+  // 静的ファイルには秘密情報が含まれないため、Host と Origin だけを検証する
   if (STATIC_FILES[url.pathname]) {
     if (method !== "GET") throw new HttpError(405, "許可されていないメソッドです");
     const [file, type] = STATIC_FILES[url.pathname];
@@ -434,7 +434,7 @@ function listen(tries = 0) {
   server.listen(port, "127.0.0.1", () => {
     server.removeAllListeners("error");
     const url = `http://127.0.0.1:${port}/?token=${TOKEN}`;
-    console.log(`制作物エディタを起動しました。\n${url}\n終了は Ctrl+C`);
+    console.log(`制作物エディタを起動しました。\n${url}\nCtrl+C で終了できます。`);
     openBrowser(url);
   });
 }

@@ -20,7 +20,7 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
-  // 表示中だけ本文スクロールを止める。px指定でなく html への overflow-hidden 付け外し
+  // 拡大画像の表示中だけ、ピクセル値を指定せずに html 要素の overflow-hidden を切り替えて本文のスクロールを止める
   useEffect(() => {
     if (!open) return;
     document.documentElement.classList.add("overflow-hidden");

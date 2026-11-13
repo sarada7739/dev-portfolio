@@ -3,7 +3,7 @@ import { contactSchema } from "@/lib/contact-schema";
 
 const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
-// ヘッダインジェクション対策。message の改行はそのまま許容する
+// ヘッダインジェクションを防ぐために改行を除く。本文の message では改行を残す
 function stripNewlines(value: string) {
   return value.replace(/[\r\n]/g, "");
 }
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "invalid_input" }, { status: 400 });
   }
 
-  // モジュールトップで読むとテストで差し替えにくいためハンドラ内で読む
+  // テストで環境変数を差し替えやすいよう、ハンドラ内で読み込む
   const resendApiKey = process.env.RESEND_API_KEY;
   const contactToEmail = process.env.CONTACT_TO_EMAIL;
   const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY;

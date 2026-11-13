@@ -16,21 +16,22 @@ export default function PrivacyPage() {
         <section className="flex flex-col gap-2">
           <h2 className="font-serif text-h3 text-ink-soft">取得する情報</h2>
           <p className="text-body text-ink">
-            お問い合わせフォームからは、氏名・メールアドレス・本文を取得します。
+            お問い合わせフォームで氏名・メールアドレス・本文を取得します。
           </p>
         </section>
 
         <section className="flex flex-col gap-2">
           <h2 className="font-serif text-h3 text-ink-soft">利用目的</h2>
           <p className="text-body text-ink">
-            取得した情報は、お問い合わせへの返信のためにのみ使用します。それ以外の目的には使用しません。
+            取得した情報はお問い合わせへの返信にのみ使用します。
           </p>
         </section>
 
         <section className="flex flex-col gap-2">
           <h2 className="font-serif text-h3 text-ink-soft">外部サービスへの提供</h2>
           <p className="text-body text-ink">
-            送信内容は、メール配信のため米国の Resend, Inc. のサーバーを経由し、同社のポリシーにより最大30日間保存されます。同社は
+            送信内容はメール配信のため、米国の Resend, Inc. のサーバーを経由します。
+            同社のポリシーにより、送信内容は最大30日間保存されます。同社は
             GDPR に準拠した DPA・SCC を公表しています。
           </p>
           <a
@@ -46,7 +47,7 @@ export default function PrivacyPage() {
         <section className="flex flex-col gap-2">
           <h2 className="font-serif text-h3 text-ink-soft">スパム対策</h2>
           <p className="text-body text-ink">
-            Cloudflare Turnstile を利用しており、IP アドレス・ブラウザ情報等のアクセス情報が
+            スパム対策として Cloudflare Turnstile を利用しており、IP アドレスやブラウザ情報などのアクセス情報が
             Cloudflare, Inc. に送信されます。
           </p>
           <a

@@ -13,7 +13,7 @@ export default function Footer() {
             <span className="eyebrow">CONTACT</span>
             <h2>開発のご相談</h2>
             <p>
-              ご依頼や技術的なご質問など、
+              開発のご依頼や技術的なご質問など、
               <br />
               お気軽にお問い合わせください。
             </p>

@@ -8,13 +8,13 @@ const CREAM = "#f2f0ea"; // docs/design-tokens.md cream
 const INK = "#1a1d23"; // docs/design-tokens.md ink
 const GRAY = "#8b8b88"; // docs/design-tokens.md gray
 
-// satori は woff2 非対応のため、TTF を返す UA を偽装して Google Fonts CSS から実ファイルURLを引く
+// satori は woff2 と woff に対応していないため、Google Fonts の CSS から TTF の URL を取得する
 async function loadGoogleFont(text: string) {
   const cssUrl = `https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600&text=${encodeURIComponent(text)}`;
   const css = await (
     await fetch(cssUrl, {
       headers: {
-        // woff2/woff非対応を装うUAでないとGoogle FontsがTTFを返さない（satoriはwoff2/woff未対応）
+        // Google Fonts が TTF を返すよう、woff2 と woff に対応していないブラウザーの User-Agent を送る
         "User-Agent":
           "Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.0 Safari/534.34",
       },
@@ -35,7 +35,7 @@ export default async function Image() {
   try {
     fontData = await loadGoogleFont(text);
   } catch (error) {
-    // フォント取得失敗時もOGP画像の生成自体は止めない。理由の種別のみ出す
+    // フォントを取得できなくても OGP 画像は生成し、取得に失敗した理由の種別だけをログに出す
     console.error(
       "opengraph-image:font_fetch_failed",
       error instanceof Error ? error.message : "unknown",
@@ -53,14 +53,14 @@ export default async function Image() {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: CREAM,
-          // satori はキー自体の有無で判定するため、フォールバック時はキーごと外す
+          // satori は fontFamily の有無で判定するため、フォールバック時は指定を省く
           ...(fontData ? { fontFamily: "Shippori Mincho" } : {}),
         }}
       >
         <div
           style={{
             fontSize: 56, // docs/design-tokens.md display スケール（デスクトップ側）
-            lineHeight: 1.3, // docs/design-tokens.md display 行間
+            lineHeight: 1.3, // docs/design-tokens.md の display の行間
             color: INK,
             textAlign: "center",
             whiteSpace: "pre-line",
