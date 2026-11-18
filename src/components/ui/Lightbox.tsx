@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 type LightboxProps = {
@@ -12,6 +12,15 @@ type LightboxProps = {
 
 export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const viewport = useRef<HTMLDivElement>(null);
+  const [zoom, setZoom] = useState(false);
+
+  useLayoutEffect(() => {
+    const view = viewport.current;
+    if (!view) return;
+    view.scrollLeft = (view.scrollWidth - view.clientWidth) / 2;
+    view.scrollTop = (view.scrollHeight - view.clientHeight) / 2;
+  }, [zoom]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -42,23 +51,31 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
           event.clientY <= rect.bottom;
         if (!inside) dialogRef.current?.close();
       }}
-      className="work-dialog m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-black/90"
+      className="work-dialog"
     >
-      <button
-        type="button"
-        onClick={() => dialogRef.current?.close()}
-        aria-label="閉じる"
-        className="absolute right-4 top-4 z-10 flex size-11 items-center justify-center rounded-pill border border-line bg-card text-body text-ink"
-      >
-        ×
-      </button>
-      <div className="w-full max-h-dvh p-6">
-        <div className="relative aspect-thumb w-full">
+      <div className="work-dialog-controls">
+        <button
+          type="button"
+          aria-label={zoom ? "画像を全体表示に戻す" : "画像を2倍に拡大"}
+          onClick={() => setZoom(!zoom)}
+        >
+          {zoom ? "1×" : "2×"}
+        </button>
+        <button
+          type="button"
+          onClick={() => dialogRef.current?.close()}
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+      </div>
+      <div className="work-dialog-view" ref={viewport}>
+        <div className="work-dialog-photo" data-zoom={zoom}>
           <Image
             src={src}
             alt={alt}
             fill
-            sizes="(min-width: 1024px) 80vw, 100vw"
+            sizes={zoom ? "190vw" : "95vw"}
             className="object-contain"
           />
         </div>

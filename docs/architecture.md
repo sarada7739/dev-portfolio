@@ -22,7 +22,7 @@ src/
     api/contact/route.ts  # フォーム受信 → Turnstile 検証 → Resend 送信
   components/
     sections/             # Hero, Nisoine, Works, HowIWork, Footer
-    ui/                   # Tag, Button, WorkCard など再利用部品
+    ui/                   # Button、WorkGallery、Lightbox などの表示部品
   data/
     works.json            # 制作物データ。素材差し替えはここだけ触る
     how-i-work.json       # HOW I WORK の4項目
@@ -49,6 +49,11 @@ docs/
 - タップ位置の手前の粒から、輪の周方向と管の断面方向に沿った距離で波の到達時刻を求める。到達した粒は表面の法線方向に変位する。ドラッグは接点近傍から追従し、離したときの角速度を引き継ぐ。
 - タッチの縦方向はページスクロールに使う。キーボードからも波と回転を操作できる。
 - 共有画像は同じ粒子の静止画を使った `src/app/opengraph-image.png`。色と寸法の根拠は `docs/design-tokens.md` に記録する。
+
+## 作品の展示
+- Nisoineの紹介に続き、`WorkGallery` が `works.json` の掲載順で目次と展示を生成する。全作品の説明とリンクは初期HTMLに含める。
+- 横スクロールが止まる位置をCSSで作品ごとに設定し、表示位置から目次と前後ボタンを同期する。各作品は `#project-<slug>` で直接開ける。
+- 画像は拡大画面で全体表示と2倍表示を切り替えられる。JavaScript無効時は画像リンクで原本を開く。
 
 ## 過去のサイト
 - `/versions` から `/editions/classic` と `/editions/neon` を開ける。各版の上部から一覧と最新版へ戻れる。
@@ -91,7 +96,7 @@ docs/
 - ブレークポイントはトークン文書で確定（想定: sm 640 / md 768 / lg 1024 / xl 1280）
 
 ## ローカル編集ツール（tools/admin）
-- 制作物グリッド（works.json と public/images/works/）を GUI で編集するローカル専用ツール。`pnpm admin` で起動
+- 作品一覧（works.json と public/images/works/）を GUI で編集するローカル専用ツール。`pnpm admin` で起動
 - Next.js アプリとは独立した Node 標準モジュールのみのサーバー。本番ビルド・デプロイに一切含めない
 - 127.0.0.1 のみで待ち受け。起動ごとのランダムトークンと Host / Origin 検証で他サイトからの操作を拒否
 - 画像の切り抜き・縮小はブラウザの canvas で行い、サーバーは JPEG を書き込むだけ（sharp 等の追加依存なし）

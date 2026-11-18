@@ -1,22 +1,17 @@
 import Container from "@/components/ui/Container";
-import WorkCard from "@/components/ui/WorkCard";
+import WorkGallery from "@/components/ui/WorkGallery";
 import { works } from "@/data";
 
 export default function Works() {
+  if (!works.length) return null;
   return (
     <section
       id="works-all"
       className="section works-section"
-      aria-label="その他の制作物"
+      aria-labelledby="gallery-heading"
     >
       <Container>
-        <div className="works-grid">
-          {works.map((work) => (
-            <div key={work.slug} className="work-entry">
-              <WorkCard work={work} />
-            </div>
-          ))}
-        </div>
+        <WorkGallery items={works} />
       </Container>
     </section>
   );

@@ -1,4 +1,4 @@
-// 「その他の制作物」に表示するカード1件分のデータ
+// 作品一覧とローカル編集ツールで共有する作品1件分のデータ
 export type Work = {
   slug: string;
   title: string;

@@ -5,7 +5,7 @@
 なし
 
 ## 直前に完了
-T-040 粒子の輪の慣性と立体波（L3 / V2）。メインのGPT-6.2 Astra（ultra）で実装・検証。
+T-041 作品目次と大判の展示（L2 / V2）。メインが単独で実装・検証。
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）。
@@ -21,6 +21,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）。
 - トップの粒子は停止・再開に対応。画面外・非表示タブでは描画を停止し、動きを減らす設定とJavaScript無効時は静止画を表示する。
 - T-038 の証跡は docs/reference/shots/t038-checks.json、t038-hero-*.png、t038-page-*.png、t038-lighthouse-final.json。320〜1440pxで横はみ出し0、Lighthouseモバイル性能92・アクセシビリティ100・CLS 0。
 - Nisoineと6件の作品を掲載。制作物は pnpm admin で編集し、ツールの「公開」は未pushコミットもまとめてpushする。
+- 作品一覧は /#works-all、各作品は /#project-<slug>。目次と横スワイプ、大判の実画像、2倍表示に対応。
 - 既存の公開URLは https://dev-portfolio.sarada7739.workers.dev 。GitHub sarada7739/dev-portfolio の main push で自動デプロイする。
 - 現行サイトはAstryx Buttonと事前ビルドした専用テーマを使用。日本語は端末標準、欧文は自前配信のGeist。テーマの再生成手順は docs/architecture.md。
 - フォームはcompact Turnstileを近接・フォーカス時に読み込み、検証スキーマを送信時に読み込む。模擬送信を確認し、実メール送信は未検証。
