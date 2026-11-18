@@ -153,7 +153,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="neon-button neon-button-primary"
+          className="action-button action-primary"
         >
           送信する
         </button>

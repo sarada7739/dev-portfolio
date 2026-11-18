@@ -30,6 +30,7 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
   return (
     <dialog
       ref={dialogRef}
+      aria-label={alt}
       onClose={onClose}
       onClick={(event) => {
         const rect = dialogRef.current?.getBoundingClientRect();
@@ -41,13 +42,13 @@ export default function Lightbox({ src, alt, open, onClose }: LightboxProps) {
           event.clientY <= rect.bottom;
         if (!inside) dialogRef.current?.close();
       }}
-      className="m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-navy-deep/90"
+      className="work-dialog m-auto w-full max-w-content border-0 bg-transparent p-0 backdrop:bg-black/90"
     >
       <button
         type="button"
         onClick={() => dialogRef.current?.close()}
         aria-label="閉じる"
-        className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-pill border border-navy-border bg-navy-light text-body text-on-navy"
+        className="absolute right-4 top-4 z-10 flex size-11 items-center justify-center rounded-pill border border-line bg-card text-body text-ink"
       >
         ×
       </button>

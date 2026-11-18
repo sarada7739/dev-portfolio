@@ -1,24 +1,26 @@
 import Image from "next/image";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import Tag from "@/components/ui/Tag";
 import { featured } from "@/data";
 
 export default function Featured() {
   return (
-    <section id="works" className="section featured-section">
+    <section
+      id="works"
+      className="featured-section section"
+      aria-labelledby="works-heading"
+    >
       <Container>
-        <div className="section-heading assemble from-left delay-2">
-          <h2>制作物</h2>
-          <span className="section-note">個人開発のプロジェクト</span>
-        </div>
-        <div className="featured-panel glass-panel assemble from-right delay-3">
+        <h2 className="section-title" id="works-heading">
+          制作物
+        </h2>
+        <div className="featured-project">
           <div className="featured-art">
             <Image
               src={featured.photo}
               alt="海辺で夕日を眺めるふたり"
               fill
-              sizes="(min-width: 768px) 45vw, 100vw"
+              sizes="(min-width: 1440px) 700px, (min-width: 760px) 54vw, 100vw"
               className="featured-photo"
             />
             <Image
@@ -26,16 +28,15 @@ export default function Featured() {
               alt="Nisoine のホーム画面"
               width={359}
               height={714}
-              sizes="200px"
+              sizes="(min-width: 760px) 200px, 27vw"
               className="featured-phone"
             />
           </div>
           <div className="featured-copy">
-            <p className="eyebrow">{featured.label}</p>
-            <h3>Nisoine</h3>
+            <h3 lang="en">Nisoine</h3>
             <p className="featured-summary">
-              <span className="text-chunk">ふたりの日常を</span>
-              <span className="text-chunk">記録するアプリ。</span>
+              <span>ふたりの日常を</span>
+              <span>記録するアプリ。</span>
             </p>
             <p className="muted-text">{featured.description}</p>
             <div className="tag-list">
@@ -43,9 +44,15 @@ export default function Featured() {
                 <Tag key={tag} label={tag} />
               ))}
             </div>
-            <Button href={featured.ctaHref} arrow="→" external>
-              {featured.ctaLabel}
-            </Button>
+            <a
+              href={featured.ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              Nisoineを{featured.ctaLabel}
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </Container>

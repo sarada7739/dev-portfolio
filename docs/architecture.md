@@ -4,7 +4,7 @@
 | 領域 | 選定 | 理由 |
 |---|---|---|
 | フレームワーク | Next.js (App Router) | ユーザー指定。フォームAPIを Route Handler で同居させられる |
-| スタイル | Tailwind CSS v4 / Astryx | CSS変数で参照画像の配色を管理し、Astryx Buttonをネオン配色で使用する |
+| スタイル | Tailwind CSS v4 / Astryx | CSS変数で配色を管理し、Astryx Buttonに共通の紫を適用する |
 | フォント | next/font（Geist）/ 日本語の端末標準ゴシック | 欧文をself-host、日本語はHiragino / Yu Gothic / Meiryoで表示し、分割フォント読込を省く |
 | ホスティング | Cloudflare Pages + @opennextjs/cloudflare | Nisoine と同じ管理画面。無料枠。Route Handler が Workers 上で動く |
 | メール送信 | Resend | 無料 3,000通/月。API が単純。送信内容を保存しない |
@@ -40,14 +40,18 @@ docs/
 - コンポーネントはトークン（Tailwind クラス）のみ使い、生の px / 色コードをハードコードしない
 - トークン抽出（V2 / impl-ui）→ 個別セクション実装（impl-l1）の順で進める
 
-## 表示と初期アニメーション
+## 表示と粒子
 - Astryx の `src/theme/portfolioTheme.ts` に既存CSS変数を参照する12トークンを定義し、公式CLIで生成した `portfolio.js` と `portfolio.css` を読み込む。ThemeProvider は dark に固定する。
 - テーマ更新後は `pnpm dlx @astryxdesign/cli@0.7.13 theme build src/theme/portfolioTheme.ts --out src/theme/portfolio.css` を実行し、生成したJS/CSS/型定義もコミットする。
-- 欧文の Geist は next/font から配信し、日本語は端末標準ゴシックへフォールバックする。日本語の分割フォントとヒーロー画像の帯域競合を避け、外部フォント通信を発生させない。
-- `assemble-in` の CSS アニメーションで各パーツが画面外から集まる。1000ms、遅延0〜600ms。transformのみを変更する。
-- ヒーロー画像は600ms・遅延なしで到着し、ほかのパーツが続いて組み上がる。
-- reduced-motion・キーボードフォーカス・アンカー移動では即時表示。本文の表示はJavaScriptに依存しない。
-- 参照画像は `docs/reference/neon-portfolio.jpg`。装飾ヒーローは `public/images/neon-hero.png`、制作物は既存の実素材を使う。
+- 欧文は `next/font/local` で Geist を配信し、日本語は端末標準ゴシックで表示する。
+- ヒーローは最初に `public/images/particle-orbit.webp` を描画する。Canvas 2D は `src/components/particles/field.ts` の固定シードから同じ粒子配置を生成する。
+- 動きは最大30fps。手動停止、画面外、タブ非表示で連続描画を止める。動きを減らす設定では静止画を表示する。
+- 共有画像は同じ粒子の静止画を使った `src/app/opengraph-image.png`。色と寸法の根拠は `docs/design-tokens.md` に記録する。
+
+## 過去のサイト
+- `/versions` から `/editions/classic` と `/editions/neon` を開ける。各版の上部から一覧と最新版へ戻れる。
+- `public/editions` のHTMLとCSSはクラシック版（456d740）とネオン版（0113f86）のホームを静的に保存したもの。写真と拡大画像も各コミットのデータから取り出し、同じ内容の画像を共有する。
+- 過去版のページ内リンクと画像拡大は独立して動く。問い合わせは最新版へ案内する。作品編集ツールの変更は現行ページに反映する。
 
 ## フォームの境界
 ```
@@ -78,7 +82,7 @@ docs/
 6. ローカル Windows では OpenNext ビルドが symlink の権限で失敗する（開発者モード有効化または WSL で回避）。検証は CI と Cloudflare 側のビルドで行う
 
 ## 状態管理
-- クライアント状態はフォームの入力値・送信状態のみ。`useState` で足りる。状態管理ライブラリは入れない
+- フォーム、画像拡大、粒子の再生状態は各コンポーネントで管理する。
 
 ## 対応環境
 - モダンブラウザ最新2バージョン（Chrome / Safari / Firefox / Edge）。IE 非対応

@@ -7,5 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: site.url,
       lastModified: new Date(),
     },
+    { url: `${site.url}/versions` },
   ];
 }

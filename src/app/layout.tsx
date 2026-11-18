@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/data";
 import ThemeProvider from "@/components/ui/ThemeProvider";
 import "./globals.css";
 
-const geist = Geist({
+const geist = localFont({
+  src: "../../public/fonts/geist-latin.woff2",
+  weight: "100 900",
   variable: "--font-geist",
-  subsets: ["latin"],
   display: "swap",
 });
 
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     siteName: site.title,
     locale: "ja_JP",
     type: "website",
-    images: ["/opengraph-image"],
+    images: ["/opengraph-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/opengraph-image"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "/",

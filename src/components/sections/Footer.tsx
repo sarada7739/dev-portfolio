@@ -8,10 +8,9 @@ export default function Footer() {
   return (
     <footer id="contact" className="section contact-section">
       <Container>
-        <div className="contact-panel glass-panel assemble from-bottom delay-6">
+        <div className="split-section contact-panel">
           <div className="contact-heading">
-            <span className="eyebrow">CONTACT</span>
-            <h2>開発のご相談</h2>
+            <h2 className="section-title">開発のご相談</h2>
             <p>
               開発のご依頼や技術的なご質問など、
               <br />
@@ -33,7 +32,9 @@ export default function Footer() {
                 {item.label}
               </a>
             ))}
+            <Link href="/versions">過去のサイト</Link>
             <Link href="/privacy">プライバシーポリシー</Link>
+            <a href="#top">先頭へ ↑</a>
           </div>
         </div>
       </Container>

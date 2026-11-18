@@ -11,11 +11,8 @@ export default function Works() {
     >
       <Container>
         <div className="works-grid">
-          {works.map((work, index) => (
-            <div
-              key={work.slug}
-              className={`work-entry assemble ${index % 2 === 0 ? "from-left" : "from-right"} delay-${Math.min(index + 2, 6)}`}
-            >
+          {works.map((work) => (
+            <div key={work.slug} className="work-entry">
               <WorkCard work={work} />
             </div>
           ))}

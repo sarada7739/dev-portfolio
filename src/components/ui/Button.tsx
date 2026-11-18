@@ -24,10 +24,12 @@ export default function Button({
       variant={tone}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className={`neon-button neon-button-${tone}`}
+      className={`action-button action-${tone}`}
     >
-      <span>{children}</span>
-      {arrow ? <span aria-hidden="true">{arrow}</span> : null}
+      <span className="action-label">
+        {children}
+        {arrow ? <span aria-hidden="true">{arrow}</span> : null}
+      </span>
     </AstryxButton>
   );
 }

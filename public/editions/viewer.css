@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "Archive Geist";
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archive Mincho";
+  src: url("/editions/media/shippori-mincho.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+:root {
+  --font-serif-jp: "Archive Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-sans-jp: "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  --font-serif-latin: Georgia, serif;
+  --font-geist: "Archive Geist", Arial, sans-serif;
+}
+html {
+  scroll-padding-top: 4rem;
+}
+.edition-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 clamp(0.8rem, 3vw, 3rem);
+  border-bottom: 1px solid #343438;
+  background: #101012;
+  color: #fff;
+  font:
+    500 0.78rem/1.5 system-ui,
+    sans-serif;
+}
+.edition-toolbar div {
+  display: flex;
+  gap: clamp(0.75rem, 3vw, 2rem);
+}
+.edition-toolbar a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #e0d6ff;
+  text-decoration: none;
+}
+.edition-toolbar a:hover {
+  text-decoration: underline;
+}
+.edition-toolbar a:focus-visible,
+.edition-dialog button:focus-visible {
+  outline: 2px solid #c8b5ff;
+  outline-offset: -3px;
+}
+.edition-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 4rem 1.25rem;
+  background: transparent;
+  border: 0;
+}
+.edition-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+.edition-dialog::backdrop {
+  background: rgb(0 0 0 / 90%);
+}
+.edition-dialog img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 8rem);
+  object-fit: contain;
+}
+.edition-dialog button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #18181b;
+  color: #fff;
+  font: 1.5rem system-ui;
+  cursor: pointer;
+}
+html:has(.edition-dialog[open]) {
+  overflow: hidden;
+}

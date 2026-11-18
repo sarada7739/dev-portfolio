@@ -1,36 +1,32 @@
 # 現在地
-更新: 2026-11-13
+更新: 2026-11-18
 
 ## 進行中
 なし
 
 ## 直前に完了
-T-037 ポートフォリオと編集ツールの日本語を推敲（L2、reviewer 続行、最終稿26ファイル照合・lint・型検査・テスト7件・本番ビルドを確認）
+T-038 粒子のポートフォリオと過去版の閲覧（L2 / V2）。依頼に従いメインが単独で実装・画面照合した。ローカル本番ビルドで確認済み。
 
 ## 次にやる
-T-016 フォーム失敗時に Turnstile をリセット（L1）
+T-016 フォーム失敗時に Turnstile をリセット（L1）。
 
-## 詰まっている点
-なし
+## 公開前の残件
+既存の開発依存 picomatch に重大度 high が1件。npm の最新版4.0.7にも該当し、公式の修正版は未掲載。全依存の CI 監査は未達、本番依存の監査は0件。監査除外や依存バージョンの変更は行っていない。
 
 ## メモ
-- T-035 は Next.js 16.4.6、Zod 4.6.7、OpenNext Cloudflare 1.20.16、Wrangler 4.160.0 に更新。既存の `braces` 監査除外は修正版未公開のため継続。
-- T-035 の最終ロックで固定インストール、lint、型検査、ビルド、7テスト、1440px／390px、AVIF、問い合わせAPIの400／415を確認。
-- 公開 URL は https://dev-portfolio.sarada7739.workers.dev（GitHub sarada7739/dev-portfolio、main pushで自動デプロイ）。
-- 新参照は docs/reference/neon-portfolio.jpg。トークンは docs/design-tokens.md。生成ヒーローは public/images/neon-hero.png、生成指示は docs/reference/neon-hero-generation.json。
-- 初期表示は上下左右の画面外から集合。ヒーロー600ms、全体最大1600ms。reduced-motion・フォーカス・アンカー移動は即時表示。
-- 大きなキャッチコピーを置かず、開発についての説明はです・ます調。日本語は端末標準ゴシック、欧文はself-host Geist。
-- Astryx Buttonと事前ビルドの専用テーマを導入。テーマの再生成手順は docs/architecture.md。
-- T-034 では320/375/390/711/1440pxで横はみ出し0、Lighthouse mobile P91/A100/CLS0を確認。
-- 証跡は docs/reference/shots/t034-check.json、t034-lighthouse.json、t034-after-*.png、t034-entrance.webm。実メール送信は未検証。
-- フォームはcompact Turnstileを近接/フォーカス時に読み込み、検証スキーマを送信時に読み込む。同時送信は同期refロックで抑止する。
+- T-038 の参照は Refero に掲載された Dala。リンクと配色は docs/design-tokens.md。粒子は src/components/particles、初期画像は public/images/particle-orbit.webp。
+- /versions にクラシック版（456d740）・ネオン版（0113f86）を保存。個別のHTML・CSSと画像は public/editions にあり、制作物データの編集から独立している。
+- トップの粒子は停止・再開に対応。画面外・非表示タブでは描画を停止し、動きを減らす設定とJavaScript無効時は静止画を表示する。
+- T-038 の証跡は docs/reference/shots/t038-checks.json、t038-hero-*.png、t038-page-*.png、t038-lighthouse-final.json。320〜1440pxで横はみ出し0、Lighthouseモバイル性能92・アクセシビリティ100・CLS 0。
+- Nisoineと6件の作品を掲載。制作物は pnpm admin で編集し、ツールの「公開」は未pushコミットもまとめてpushする。
+- 既存の公開URLは https://dev-portfolio.sarada7739.workers.dev 。GitHub sarada7739/dev-portfolio の main push で自動デプロイする。
+- 現行サイトはAstryx Buttonと事前ビルドした専用テーマを使用。日本語は端末標準、欧文は自前配信のGeist。テーマの再生成手順は docs/architecture.md。
+- フォームはcompact Turnstileを近接・フォーカス時に読み込み、検証スキーマを送信時に読み込む。模擬送信を確認し、実メール送信は未検証。
 - Runtime に RESEND_API_KEY / CONTACT_TO_EMAIL / TURNSTILE_SECRET_KEY、Builds に NEXT_PUBLIC_TURNSTILE_SITE_KEY。Resend送信元は onboarding@resend.dev。
-- Nisoine＋制作物6件は実素材。FieldSprigは開発中のUnity実画面を使用。GitHubリンクは Orrery / AI-Manager / Moni-to。制作物の追加は pnpm admin（tools/admin）で行える。
-- 編集ツールの公開ボタンは未pushコミットもまとめてpushする。
-- WindowsのOpenNextビルドはsymlink権限に制約があり、Cloudflare向けビルド検証はCI側で行う。
+- WindowsでのOpenNextビルドにはsymlink権限の制約がある。Cloudflare向けビルドはCIで検証する。
 - CodexはAGENTS.mdと.codex/agents/、Claude CodeはCLAUDE.mdと.claude/agents/を使い、.harness/を共有する。
 
-## 次のバックログ候補（未起票）
-- site.jsonの仮メールとSNSの#の確認。仮SNSと仮メールの宣伝リンクはフッターの表示対象から除外。
-- 編集ツールのURLトークン消去、画像パス検証、Windows予約名slug拒否。
-- Netlify移行、独自ドメインとResendドメイン認証はユーザー検討中。
+## バックログ候補
+- picomatch の修正版が公開されたら開発依存を更新して全体の監査を再実行する。
+- site.jsonの仮メールとSNS、編集ツールのURLトークン消去・画像パス・予約名slugを確認する。
+- Netlify移行、独自ドメイン、Resendドメイン認証はユーザー検討中。

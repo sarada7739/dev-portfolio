@@ -23,7 +23,7 @@ export default function WorkCard({ work }: WorkCardProps) {
         src={work.thumbnail}
         alt={alt}
         fill
-        sizes="(min-width: 1280px) 380px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        sizes="(min-width: 1440px) 620px, (min-width: 640px) 47vw, 100vw"
         className="object-cover"
       />
     </div>
@@ -47,6 +47,7 @@ export default function WorkCard({ work }: WorkCardProps) {
 
   const body = (
     <div className="work-body">
+      <span className="work-year">{work.year}</span>
       <h3>
         {titleContent}
         {work.titleMasked ? (
@@ -57,12 +58,6 @@ export default function WorkCard({ work }: WorkCardProps) {
         ) : null}
       </h3>
       <p className="work-description">{work.description}</p>
-      <div className="work-meta">
-        <span>{work.year}</span>
-        <span aria-hidden="true" className="work-arrow">
-          ↗
-        </span>
-      </div>
     </div>
   );
 
