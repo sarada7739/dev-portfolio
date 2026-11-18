@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
-import { createField, drawField, RIPPLE_DURATION, type Ripple } from "./field";
+import { createField, type SurfacePoint } from "./field";
+import { OrbitMotion } from "./motion";
+import { createRenderer, type ParticleRenderer } from "./renderer";
 
 export default function ParticleArtwork() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const surfaceRef = useRef<HTMLButtonElement>(null);
   const helpId = useId();
   const toggleRef = useRef<(() => void) | null>(null);
@@ -14,28 +15,28 @@ export default function ParticleArtwork() {
   const interactive = available && !paused;
 
   useEffect(() => {
-    const ctx = canvasRef.current?.getContext("2d", { alpha: false });
     const element = surfaceRef.current;
-    if (!ctx || !element) return;
+    if (!element) return;
     const surface = element;
-    const canvas = ctx.canvas;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    let field: ReturnType<typeof createField> | undefined;
+    let orbit: OrbitMotion | undefined;
+    let renderer: ParticleRenderer | null = null;
+    let useGPU = true;
+    let width = 1,
+      height = 1;
     let inView = false;
     let stopped = false;
     let frame = 0;
-    let elapsed = 0;
     let last = 0;
-    let yaw = 0;
-    let pitch = 0;
-    const ripples: Ripple[] = [];
     let press: {
       id: number;
       x: number;
       y: number;
-      yaw: number;
-      pitch: number;
+      anchor: SurfacePoint;
+      vx: number;
+      vy: number;
+      stamp: number;
     } | null = null;
     let dragged = false;
     let targetX = 0,
@@ -43,31 +44,48 @@ export default function ParticleArtwork() {
       x = 0,
       y = 0;
 
-    const render = () => {
-      field ??= createField();
-      while (
-        ripples.length &&
-        elapsed - ripples[0].startedAt >= RIPPLE_DURATION
-      ) {
-        ripples.shift();
+    function render(dt: number) {
+      orbit ??= new OrbitMotion(createField());
+      if (!renderer) {
+        renderer = createRenderer(orbit.points, useGPU);
+        if (!renderer) return false;
+        const canvas = renderer.canvas;
+        canvas.width = width;
+        canvas.height = height;
+        canvas.setAttribute("aria-hidden", "true");
+        canvas.addEventListener("webglcontextlost", lost);
+        surface.append(canvas);
+        setAvailable(true);
       }
-      drawField(ctx, field, elapsed, {
-        yaw: yaw + 0.1 * x,
-        pitch: pitch - 0.09 * y,
-        ripples,
-      });
-      canvas.dataset.ready = "true";
-    };
+      const smooth = -Math.expm1(-dt * 10);
+      x += (targetX - x) * smooth;
+      y += (targetY - y) * smooth;
+      orbit.step(dt, x, y);
+      renderer.draw(orbit.camera);
+      if (!renderer.canvas.dataset.ready)
+        renderer.canvas.dataset.ready = "true";
+      return true;
+    }
+
+    function discard() {
+      if (!renderer) return;
+      renderer.canvas.removeEventListener("webglcontextlost", lost);
+      renderer.canvas.remove();
+      renderer.dispose();
+      renderer = null;
+    }
+
+    function lost() {
+      useGPU = false;
+      discard();
+      setAvailable(false);
+      sync();
+    }
 
     function tick(now: number) {
-      if (!last || now - last >= 1000 / 30) {
-        if (last) elapsed += Math.min(now - last, 80) / 1000;
-        last = now;
-        x += (targetX - x) * 0.12;
-        y += (targetY - y) * 0.12;
-        render();
-      }
-      frame = requestAnimationFrame(tick);
+      const dt = last ? Math.min((now - last) / 1000, 0.06) : 0;
+      last = now;
+      if (render(dt)) frame = requestAnimationFrame(tick);
     }
 
     function sync() {
@@ -78,19 +96,26 @@ export default function ParticleArtwork() {
         center();
       }
       if (motion.matches) {
-        delete canvas.dataset.ready;
+        setAvailable(false);
       } else if (inView && !document.hidden) {
-        if (stopped) render();
+        if (renderer) setAvailable(true);
+        if (stopped) render(0);
         else frame = requestAnimationFrame(tick);
       }
-      setAvailable(!motion.matches);
     }
 
     function resize() {
-      const { width, height } = canvas.getBoundingClientRect();
+      const rect = surface.getBoundingClientRect();
       const ratio = Math.min(window.devicePixelRatio || 1, 1.75);
-      canvas.width = Math.max(1, Math.round(width * ratio));
-      canvas.height = Math.max(1, Math.round(height * ratio));
+      width = Math.max(1, Math.round(rect.width * ratio));
+      height = Math.max(1, Math.round(rect.height * ratio));
+      if (
+        renderer &&
+        (width !== renderer.canvas.width || height !== renderer.canvas.height)
+      ) {
+        renderer.canvas.width = width;
+        renderer.canvas.height = height;
+      }
       sync();
     }
 
@@ -108,21 +133,24 @@ export default function ParticleArtwork() {
         release();
         return;
       }
-      if (surface.disabled || event.button !== 0) return;
+      if (surface.disabled || event.button !== 0 || !orbit) return;
       dragged = false;
       press = {
         id: event.pointerId,
         x: event.clientX,
         y: event.clientY,
-        yaw,
-        pitch,
+        anchor: pickAt(event.clientX, event.clientY),
+        vx: 0,
+        vy: 0,
+        stamp: event.timeStamp,
       };
       surface.setPointerCapture(event.pointerId);
     }
 
     function point(event: PointerEvent) {
       if (surface.disabled || !event.isPrimary) return;
-      const bounds = canvas.getBoundingClientRect();
+      if (!orbit) return;
+      const bounds = surface.getBoundingClientRect();
       if (press && event.pointerId === press.id) {
         const dx = event.clientX - press.x;
         const dy = event.clientY - press.y;
@@ -134,13 +162,19 @@ export default function ParticleArtwork() {
             return;
           }
           surface.dataset.dragging = "true";
+          orbit.grab(press.anchor);
           center();
         }
-        yaw = press.yaw + (dx / bounds.width) * Math.PI;
-        pitch = Math.max(
-          -1,
-          Math.min(1, press.pitch - (dy / bounds.height) * Math.PI),
-        );
+        const turnX = (dx / bounds.width) * Math.PI,
+          turnY = (-dy / bounds.height) * Math.PI;
+        const dt = Math.max(0.004, (event.timeStamp - press.stamp) / 1000);
+        const mix = -Math.expm1(-dt / 0.042);
+        press.vx += (turnX / dt - press.vx) * mix;
+        press.vy += (turnY / dt - press.vy) * mix;
+        orbit.rotate(turnX, turnY);
+        press.x = event.clientX;
+        press.y = event.clientY;
+        press.stamp = event.timeStamp;
       } else if (
         event.pointerType === "mouse" &&
         finePointer.matches &&
@@ -154,20 +188,37 @@ export default function ParticleArtwork() {
     function end(event: PointerEvent) {
       if (event.pointerId !== press?.id) return;
       if (event.type !== "pointerup") dragged = true;
+      else if (dragged && press) {
+        const idle = Math.exp(-Math.max(0, event.timeStamp - press.stamp) / 65);
+        orbit?.coast(press.vx * idle, press.vy * idle);
+      }
       release();
+    }
+
+    function pickAt(clientX: number, clientY: number) {
+      const bounds = surface.getBoundingClientRect();
+      const scale = Math.min(bounds.width / 800, bounds.height / 640);
+      return orbit!.pick(
+        (clientX - bounds.left - bounds.width / 2) / scale,
+        (clientY - bounds.top - bounds.height / 2) / scale,
+      );
     }
 
     function pulse(event: MouseEvent) {
       if (surface.disabled || (event.detail !== 0 && dragged)) return;
-      const bounds = canvas.getBoundingClientRect();
+      const bounds = surface.getBoundingClientRect();
       const px =
-        event.detail === 0 ? 0.5 : (event.clientX - bounds.left) / bounds.width;
+        event.detail === 0 ? bounds.left + bounds.width / 2 : event.clientX;
       const py =
-        event.detail === 0 ? 0.5 : (event.clientY - bounds.top) / bounds.height;
-      if (px < 0 || px > 1 || py < 0 || py > 1) return;
-      // 連打しても1フレームで計算する波の数を一定に保つ。
-      if (ripples.length === 3) ripples.shift();
-      ripples.push({ x: px, y: py, startedAt: elapsed });
+        event.detail === 0 ? bounds.top + bounds.height / 2 : event.clientY;
+      if (
+        px < bounds.left ||
+        px > bounds.right ||
+        py < bounds.top ||
+        py > bounds.bottom
+      )
+        return;
+      orbit?.pulse(pickAt(px, py));
     }
 
     function turn(event: KeyboardEvent) {
@@ -175,16 +226,16 @@ export default function ParticleArtwork() {
         return;
       switch (event.key) {
         case "ArrowLeft":
-          yaw -= 0.2;
+          orbit?.rotate(-0.2, 0);
           break;
         case "ArrowRight":
-          yaw += 0.2;
+          orbit?.rotate(0.2, 0);
           break;
         case "ArrowUp":
-          pitch = Math.min(1, pitch + 0.2);
+          orbit?.rotate(0, 0.2);
           break;
         case "ArrowDown":
-          pitch = Math.max(-1, pitch - 0.2);
+          orbit?.rotate(0, -0.2);
           break;
         default:
           return;
@@ -208,8 +259,8 @@ export default function ParticleArtwork() {
     });
     const resizeObserver = new ResizeObserver(resize);
     resize();
-    observer.observe(canvas);
-    resizeObserver.observe(canvas);
+    observer.observe(surface);
+    resizeObserver.observe(surface);
     motion.addEventListener("change", sync);
     document.addEventListener("visibilitychange", sync);
     const listeners = new AbortController();
@@ -231,6 +282,7 @@ export default function ParticleArtwork() {
       document.removeEventListener("visibilitychange", sync);
       listeners.abort();
       release();
+      discard();
     };
   }, []);
 
@@ -254,9 +306,7 @@ export default function ParticleArtwork() {
         aria-hidden={!interactive}
         aria-label="粒子の輪に波紋を広げる"
         aria-describedby={interactive ? helpId : undefined}
-      >
-        <canvas ref={canvasRef} aria-hidden="true" />
-      </button>
+      />
       {interactive && (
         <span className="sr-only" id={helpId}>
           Enterまたはスペースキーで波紋を広げ、矢印キーで輪を回転できます。

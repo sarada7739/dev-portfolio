@@ -8,19 +8,33 @@ const colors = [
   "#ffc6b8",
 ];
 const shades = [0.19, 0.39, 0.67, 0.95];
-export const RIPPLE_DURATION = 1.35;
+export const SECTORS = 36;
+export const SLICES = 8;
+export const CELL_COUNT = SECTORS * SLICES;
 
-export type Ripple = { x: number; y: number; startedAt: number };
-type View = { yaw: number; pitch: number; ripples: readonly Ripple[] };
-type Particle = {
+export type SurfacePoint = { u: number; v: number };
+export type Particle = SurfacePoint & {
   x: number;
   y: number;
   z: number;
+  nx: number;
+  ny: number;
+  nz: number;
+  cell: number;
+  color: string;
+  opacity: number;
   radius: number;
   glint: boolean;
 };
-type Layer = { color: string; opacity: number; particles: Particle[] };
 
+export function surfaceDistance(a: SurfacePoint, b: SurfacePoint) {
+  const du = Math.abs(a.u - b.u) % TAU;
+  const dv = Math.abs(a.v - b.v) % TAU;
+  return Math.hypot(
+    0.72 * Math.min(du, TAU - du),
+    0.3 * Math.min(dv, TAU - dv),
+  );
+}
 function seededRandom() {
   let state = 0x39a7124;
   return () => {
@@ -39,9 +53,7 @@ function bandColor(band: number, seam: number) {
 
 export function createField() {
   const random = seededRandom();
-  const layers: Layer[] = shades.flatMap((opacity) =>
-    colors.map((color) => ({ color, opacity, particles: [] })),
-  );
+  const particles: Particle[] = [];
 
   function add(
     x: number,
@@ -50,21 +62,32 @@ export function createField() {
     radius: number,
     color: number,
     light: number,
+    u = -1,
+    v = 0,
   ) {
     const shade = Math.max(
       0,
       Math.min(shades.length - 1, Math.floor(light * shades.length)),
     );
     const glint = light > 0.68 && radius > 1.85 && random() < 0.18;
-    layers[shade * colors.length + color].particles.push({
+    const sector = Math.round((u / TAU) * SECTORS) % SECTORS;
+    const slice = ((Math.round((v / TAU) * SLICES) % SLICES) + SLICES) % SLICES;
+    particles.push({
       x,
       y,
       z,
+      u,
+      v,
       radius,
       glint,
+      color: colors[color],
+      opacity: shades[shade],
+      cell: u < 0 ? CELL_COUNT : sector * SLICES + slice,
+      nx: Math.cos(u) * Math.cos(v),
+      ny: Math.sin(u) * Math.cos(v),
+      nz: Math.sin(v),
     });
   }
-
   for (let row = 0; row < 144; row++) {
     for (let col = 0; col < 30; col++) {
       const u = ((row + random() * 0.42) / 144) * TAU;
@@ -94,6 +117,8 @@ export function createField() {
         0.72 + random() ** 1.6 * 1.88 + 0.22 * seam,
         bandColor(band, seam),
         light,
+        u,
+        fold,
       );
     }
   }
@@ -110,107 +135,5 @@ export function createField() {
       random() * 0.47,
     );
   }
-  return layers;
-}
-
-function circle(
-  path: CanvasRenderingContext2D | Path2D,
-  x: number,
-  y: number,
-  radius: number,
-) {
-  path.moveTo(x + radius, y);
-  path.arc(x, y, radius, 0, TAU);
-}
-
-export function drawField(
-  ctx: CanvasRenderingContext2D,
-  layers: Layer[],
-  t: number,
-  view?: View,
-) {
-  const { width, height } = ctx.canvas;
-  const scale = Math.min(width / 800, height / 640);
-  const fieldWidth = width / scale;
-  const fieldHeight = height / scale;
-  ctx.setTransform(scale, 0, 0, scale, width / 2, height / 2);
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = "#000";
-  ctx.fillRect(-fieldWidth / 2, -fieldHeight / 2, fieldWidth, fieldHeight);
-
-  const yaw = -0.1 + 0.46 * Math.sin(t * 0.19) + (view?.yaw ?? 0);
-  const pitch = -0.48 + 0.12 * Math.sin(t * 0.16) + (view?.pitch ?? 0);
-  const sy = Math.sin(yaw),
-    cy = Math.cos(yaw);
-  const sx = Math.sin(pitch),
-    cx = Math.cos(pitch);
-  const roll = -0.31 + 0.065 * Math.sin(t * 0.13);
-  const sr = Math.sin(roll),
-    cr = Math.cos(roll);
-
-  const fronts = (view?.ripples ?? [])
-    .filter(
-      ({ startedAt }) => t >= startedAt && t - startedAt < RIPPLE_DURATION,
-    )
-    .map((ripple) => {
-      const progress = (t - ripple.startedAt) / RIPPLE_DURATION;
-      return {
-        x: (ripple.x - 0.5) * fieldWidth,
-        y: (ripple.y - 0.5) * fieldHeight,
-        radius: 5 + 470 * progress,
-        strength: (1 - progress) ** 1.35,
-      };
-    });
-  for (const front of fronts) {
-    ctx.strokeStyle = "#9bead9";
-    ctx.globalAlpha = front.strength * 0.48;
-    ctx.lineWidth = 1.15;
-    ctx.beginPath();
-    circle(ctx, front.x, front.y, front.radius);
-    ctx.stroke();
-  }
-
-  const halos = new Path2D();
-  const cores = new Path2D();
-  for (const layer of layers) {
-    ctx.fillStyle = layer.color;
-    ctx.globalAlpha = layer.opacity;
-    ctx.beginPath();
-    for (const p of layer.particles) {
-      const x = p.x * cy + p.z * sy;
-      const depth = p.z * cy - p.x * sy;
-      const y = p.y * cx - depth * sx;
-      const perspective = 3.8 / (3.8 - (p.y * sx + depth * cx));
-      let px = 322 * (x * cr - y * sr) * perspective;
-      let py = 322 * (x * sr + y * cr) * perspective;
-      let lift = 0;
-      for (const front of fronts) {
-        const dx = px - front.x,
-          dy = py - front.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const crest = 1 - Math.abs(distance - front.radius) / 34;
-        if (crest <= 0) continue;
-        const strength = crest * crest * front.strength;
-        const push = (strength * 18) / Math.max(distance, 1);
-        px += dx * push;
-        py += dy * push;
-        lift = Math.max(lift, strength);
-      }
-      const size = p.radius * perspective * (1 + lift * 0.6);
-      circle(ctx, px, py, size);
-      if (p.glint || lift > 0.26) {
-        circle(halos, px, py, size * 2.25);
-        circle(cores, px, py, size * 0.55);
-      }
-    }
-    ctx.fill();
-  }
-  // 明るい粒だけ芯とにじみを重ね、毎粒のぼかし処理を省く。
-  ctx.fillStyle = "#a9ece9";
-  ctx.globalAlpha = 0.17;
-  ctx.fill(halos);
-  ctx.fillStyle = "#ebfff9";
-  ctx.globalAlpha = 0.93;
-  ctx.fill(cores);
-  ctx.globalAlpha = 1;
+  return particles.sort((a, b) => a.opacity - b.opacity);
 }

@@ -44,9 +44,10 @@ docs/
 - Astryx の `src/theme/portfolioTheme.ts` に既存CSS変数を参照する12トークンを定義し、公式CLIで生成した `portfolio.js` と `portfolio.css` を読み込む。ThemeProvider は dark に固定する。
 - テーマ更新後は `pnpm dlx @astryxdesign/cli@0.7.13 theme build src/theme/portfolioTheme.ts --out src/theme/portfolio.css` を実行し、生成したJS/CSS/型定義もコミットする。
 - 欧文は `next/font/local` で Geist を配信し、日本語は端末標準ゴシックで表示する。
-- ヒーローは最初に `public/images/particle-orbit.webp` を描画する。Canvas 2D は `src/components/particles/field.ts` の固定シードから同じ粒子配置を生成する。
-- 動きは最大30fps。手動停止、画面外、タブ非表示で連続描画を止める。動きを減らす設定では静止画を表示する。
-- クリックとタップは入力位置から光点に波を伝える。ドラッグで回転角を調整し、タッチの縦方向はページスクロールに使う。キーボードからも波紋と回転を操作できる。
+- ヒーローは最初に `public/images/particle-orbit.webp` を表示する。画面に入ると同じ配置の点群をWebGLで一括描画する。GPUコンテキストを使えない場合や描画中に失った場合は、用意した光点の画像をCanvas 2Dで描く。
+- 動きはブラウザの画面更新に同期し、慣性・減衰は経過秒で計算する。手動停止、画面外、非表示タブでは連続描画を止める。動きを減らす設定では静止画を表示する。
+- タップ位置の手前の粒から、輪の周方向と管の断面方向に沿った距離で波の到達時刻を求める。到達した粒は表面の法線方向に変位する。ドラッグは接点近傍から追従し、離したときの角速度を引き継ぐ。
+- タッチの縦方向はページスクロールに使う。キーボードからも波と回転を操作できる。
 - 共有画像は同じ粒子の静止画を使った `src/app/opengraph-image.png`。色と寸法の根拠は `docs/design-tokens.md` に記録する。
 
 ## 過去のサイト
