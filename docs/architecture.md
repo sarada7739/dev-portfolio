@@ -46,6 +46,7 @@ docs/
 - 欧文は `next/font/local` で Geist を配信し、日本語は端末標準ゴシックで表示する。
 - ヒーローは最初に `public/images/particle-orbit.webp` を描画する。Canvas 2D は `src/components/particles/field.ts` の固定シードから同じ粒子配置を生成する。
 - 動きは最大30fps。手動停止、画面外、タブ非表示で連続描画を止める。動きを減らす設定では静止画を表示する。
+- クリックとタップは入力位置から光点に波を伝える。ドラッグで回転角を調整し、タッチの縦方向はページスクロールに使う。キーボードからも波紋と回転を操作できる。
 - 共有画像は同じ粒子の静止画を使った `src/app/opengraph-image.png`。色と寸法の根拠は `docs/design-tokens.md` に記録する。
 
 ## 過去のサイト

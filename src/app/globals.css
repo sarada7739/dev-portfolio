@@ -306,11 +306,30 @@ textarea:focus-visible {
   aspect-ratio: 5 / 4;
 }
 .particle-art canvas,
+.particle-surface,
 .particle-poster {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+.particle-surface {
+  border: 0;
+  padding: 0;
+  border-radius: 0.9rem;
+  background: transparent;
+}
+.particle-surface:enabled {
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.particle-surface[data-dragging] {
+  cursor: grabbing;
+}
+.particle-surface:focus-visible {
+  outline-offset: -3px;
 }
 .particle-art canvas {
   opacity: 0;
@@ -832,7 +851,7 @@ textarea:focus-visible {
   html {
     scroll-behavior: auto;
   }
-  .particle-art canvas,
+  .particle-surface,
   .motion-toggle {
     display: none;
   }

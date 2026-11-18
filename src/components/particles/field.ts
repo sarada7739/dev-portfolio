@@ -1,23 +1,24 @@
 const TAU = Math.PI * 2;
 const colors = [
-  "#a47aff",
-  "#d5b5ff",
-  "#ffba3c",
-  "#fff2d9",
-  "#5cd9b6",
-  "#f29dc9",
+  "#36baa6",
+  "#81e3c6",
+  "#cdf6e7",
+  "#80cbdf",
+  "#b3acec",
+  "#ffc6b8",
 ];
-const shades = [0.23, 0.51, 0.8, 1];
+const shades = [0.19, 0.39, 0.67, 0.95];
+export const RIPPLE_DURATION = 1.35;
 
+export type Ripple = { x: number; y: number; startedAt: number };
+type View = { yaw: number; pitch: number; ripples: readonly Ripple[] };
 type Particle = {
   x: number;
   y: number;
   z: number;
   radius: number;
-  dx: number;
-  dy: number;
+  glint: boolean;
 };
-
 type Layer = { color: string; opacity: number; particles: Particle[] };
 
 function seededRandom() {
@@ -26,6 +27,14 @@ function seededRandom() {
     state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
     return state / 4294967296;
   };
+}
+
+function bandColor(band: number, seam: number) {
+  if (band > 0.52 && seam > 0.83) return 5;
+  if (band > 0.45) return 4;
+  if (band > 0.06) return 3;
+  if (seam > 0.75) return 2;
+  return band > -0.53 ? 1 : 0;
 }
 
 export function createField() {
@@ -39,7 +48,6 @@ export function createField() {
     y: number,
     z: number,
     radius: number,
-    angle: number,
     color: number,
     light: number,
   ) {
@@ -47,24 +55,25 @@ export function createField() {
       0,
       Math.min(shades.length - 1, Math.floor(light * shades.length)),
     );
+    const glint = light > 0.68 && radius > 1.85 && random() < 0.18;
     layers[shade * colors.length + color].particles.push({
       x,
       y,
       z,
       radius,
-      dx: Math.cos(angle),
-      dy: Math.sin(angle),
+      glint,
     });
   }
 
-  for (let row = 0; row < 128; row++) {
-    for (let col = 0; col < 34; col++) {
-      const u = ((row + random() * 0.6) / 128) * TAU;
-      const v = ((col + random() * 0.65) / 34) * TAU;
-      const fold = v + 0.7 * Math.sin(2 * u - 0.4);
+  for (let row = 0; row < 144; row++) {
+    for (let col = 0; col < 30; col++) {
+      const u = ((row + random() * 0.42) / 144) * TAU;
+      const v = ((col + random() * 0.45) / 30) * TAU;
+      const fold = v + u + 0.62 * Math.sin(2 * u - 0.4);
+      const seam = Math.cos(3 * fold - 2 * u + 0.4);
       const radius =
         0.3 + 0.075 * Math.cos(2 * u + 0.6) + 0.025 * Math.sin(3 * v + 2 * u);
-      const loosen = random() < 0.11 ? random() * 0.085 : random() * 0.011;
+      const loosen = random() < 0.085 ? random() * 0.075 : random() * 0.011;
       const tube = radius + loosen;
       const x = (0.72 + tube * Math.cos(fold)) * Math.cos(u);
       const y = (0.58 + tube * Math.cos(fold)) * Math.sin(u);
@@ -73,28 +82,17 @@ export function createField() {
         0.28 * Math.sin(2 * u - 0.35) +
         0.12 * Math.cos(u);
       const band =
-        Math.sin(2 * u - 1.6 * Math.cos(v + 0.8) + 1.25 * Math.sin(v + u)) +
-        0.48 * Math.sin(2 * v - 2 * u) +
-        (random() - 0.5) * 0.32;
-      let color =
-        band > 0.62
-          ? 2
-          : band > 0.22
-            ? 3
-            : band > -0.06
-              ? 4
-              : band > -0.64
-                ? 0
-                : 1;
-      if (random() < 0.065) color = 5;
-      const light = 0.36 + z * 0.52 + Math.sin(fold) * 0.2 + random() * 0.25;
+        0.68 * Math.cos(u - 0.6) +
+        0.31 * Math.cos(fold + 2 * u - 1.5) +
+        (random() - 0.5) * 0.13;
+      const light =
+        0.42 + z * 0.52 + Math.sin(fold) * 0.17 + seam * 0.12 + random() * 0.21;
       add(
         x,
         y,
         z,
-        1.1 + random() ** 1.5 * 2.5,
-        u + 0.8 * v + random() * 0.6,
-        color,
+        0.72 + random() ** 1.6 * 1.88 + 0.22 * seam,
+        bandColor(band, seam),
         light,
       );
     }
@@ -107,36 +105,41 @@ export function createField() {
       Math.cos(angle) * distance,
       Math.sin(angle) * distance * 0.76,
       random() - 0.5,
-      0.75 + random() ** 3 * 4.5,
-      random() * TAU,
-      Math.floor(random() * colors.length),
-      random() * 0.48,
+      0.55 + random() ** 3 * 1.8,
+      Math.floor(random() * 5),
+      random() * 0.47,
     );
   }
   return layers;
+}
+
+function circle(
+  path: CanvasRenderingContext2D | Path2D,
+  x: number,
+  y: number,
+  radius: number,
+) {
+  path.moveTo(x + radius, y);
+  path.arc(x, y, radius, 0, TAU);
 }
 
 export function drawField(
   ctx: CanvasRenderingContext2D,
   layers: Layer[],
   t: number,
-  pointerX = 0,
-  pointerY = 0,
+  view?: View,
 ) {
   const { width, height } = ctx.canvas;
   const scale = Math.min(width / 800, height / 640);
+  const fieldWidth = width / scale;
+  const fieldHeight = height / scale;
   ctx.setTransform(scale, 0, 0, scale, width / 2, height / 2);
   ctx.globalAlpha = 1;
   ctx.fillStyle = "#000";
-  ctx.fillRect(
-    -width / (2 * scale),
-    -height / (2 * scale),
-    width / scale,
-    height / scale,
-  );
+  ctx.fillRect(-fieldWidth / 2, -fieldHeight / 2, fieldWidth, fieldHeight);
 
-  const yaw = -0.1 + 0.46 * Math.sin(t * 0.19) + 0.1 * pointerX;
-  const pitch = -0.48 + 0.12 * Math.sin(t * 0.16) - 0.09 * pointerY;
+  const yaw = -0.1 + 0.46 * Math.sin(t * 0.19) + (view?.yaw ?? 0);
+  const pitch = -0.48 + 0.12 * Math.sin(t * 0.16) + (view?.pitch ?? 0);
   const sy = Math.sin(yaw),
     cy = Math.cos(yaw);
   const sx = Math.sin(pitch),
@@ -144,14 +147,33 @@ export function drawField(
   const roll = -0.31 + 0.065 * Math.sin(t * 0.13);
   const sr = Math.sin(roll),
     cr = Math.cos(roll);
-  const spin = Math.sin(t * 0.21) * 0.26;
-  const ss = Math.sin(spin),
-    cs = Math.cos(spin);
-  ctx.lineWidth = 1.08;
-  ctx.lineJoin = "round";
 
+  const fronts = (view?.ripples ?? [])
+    .filter(
+      ({ startedAt }) => t >= startedAt && t - startedAt < RIPPLE_DURATION,
+    )
+    .map((ripple) => {
+      const progress = (t - ripple.startedAt) / RIPPLE_DURATION;
+      return {
+        x: (ripple.x - 0.5) * fieldWidth,
+        y: (ripple.y - 0.5) * fieldHeight,
+        radius: 5 + 470 * progress,
+        strength: (1 - progress) ** 1.35,
+      };
+    });
+  for (const front of fronts) {
+    ctx.strokeStyle = "#9bead9";
+    ctx.globalAlpha = front.strength * 0.48;
+    ctx.lineWidth = 1.15;
+    ctx.beginPath();
+    circle(ctx, front.x, front.y, front.radius);
+    ctx.stroke();
+  }
+
+  const halos = new Path2D();
+  const cores = new Path2D();
   for (const layer of layers) {
-    ctx.strokeStyle = layer.color;
+    ctx.fillStyle = layer.color;
     ctx.globalAlpha = layer.opacity;
     ctx.beginPath();
     for (const p of layer.particles) {
@@ -159,22 +181,36 @@ export function drawField(
       const depth = p.z * cy - p.x * sy;
       const y = p.y * cx - depth * sx;
       const perspective = 3.8 / (3.8 - (p.y * sx + depth * cx));
-      const px = 322 * (x * cr - y * sr) * perspective;
-      const py = 322 * (x * sr + y * cr) * perspective;
-      const size = p.radius * perspective;
-      const dx = (p.dx * cs - p.dy * ss) * size;
-      const dy = (p.dx * ss + p.dy * cs) * size;
-      ctx.moveTo(px + dx, py + dy);
-      ctx.lineTo(px - 0.57 * dx - 0.72 * dy, py - 0.57 * dy + 0.72 * dx);
-      ctx.lineTo(px - 0.57 * dx + 0.72 * dy, py - 0.57 * dy - 0.72 * dx);
-      ctx.closePath();
+      let px = 322 * (x * cr - y * sr) * perspective;
+      let py = 322 * (x * sr + y * cr) * perspective;
+      let lift = 0;
+      for (const front of fronts) {
+        const dx = px - front.x,
+          dy = py - front.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const crest = 1 - Math.abs(distance - front.radius) / 34;
+        if (crest <= 0) continue;
+        const strength = crest * crest * front.strength;
+        const push = (strength * 18) / Math.max(distance, 1);
+        px += dx * push;
+        py += dy * push;
+        lift = Math.max(lift, strength);
+      }
+      const size = p.radius * perspective * (1 + lift * 0.6);
+      circle(ctx, px, py, size);
+      if (p.glint || lift > 0.26) {
+        circle(halos, px, py, size * 2.25);
+        circle(cores, px, py, size * 0.55);
+      }
     }
-    ctx.stroke();
-    if (layer.opacity >= 0.8) {
-      ctx.fillStyle = layer.color;
-      ctx.globalAlpha = layer.opacity * 0.32;
-      ctx.fill();
-    }
+    ctx.fill();
   }
+  // 明るい粒だけ芯とにじみを重ね、毎粒のぼかし処理を省く。
+  ctx.fillStyle = "#a9ece9";
+  ctx.globalAlpha = 0.17;
+  ctx.fill(halos);
+  ctx.fillStyle = "#ebfff9";
+  ctx.globalAlpha = 0.93;
+  ctx.fill(cores);
   ctx.globalAlpha = 1;
 }

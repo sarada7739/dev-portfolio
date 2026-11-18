@@ -5,7 +5,7 @@
 なし
 
 ## 直前に完了
-T-038 粒子のポートフォリオと過去版の閲覧（L2 / V2）。依頼に従いメインが単独で実装・画面照合した。ローカル本番ビルドで確認済み。
+T-039 丸い粒子とポインター操作（L2 / V2）。メインのGPT-6.2 Astraが最終調整とブラウザ検証を完了。
 
 ## 次にやる
 T-016 フォーム失敗時に Turnstile をリセット（L1）。
@@ -15,6 +15,7 @@ T-016 フォーム失敗時に Turnstile をリセット（L1）。
 
 ## メモ
 - T-038 の参照は Refero に掲載された Dala。リンクと配色は docs/design-tokens.md。粒子は src/components/particles、初期画像は public/images/particle-orbit.webp。
+- T-039 は翡翠・薄紫・桃色の丸い粒子。クリック・タップで波、ドラッグで回転。画面上の操作案内は省き、読み上げに対応。検証記録は docs/reference/shots/t039-gestures.json、t039-layout.json、t039-lighthouse-final.json。
 - /versions にクラシック版（456d740）・ネオン版（0113f86）を保存。個別のHTML・CSSと画像は public/editions にあり、制作物データの編集から独立している。
 - トップの粒子は停止・再開に対応。画面外・非表示タブでは描画を停止し、動きを減らす設定とJavaScript無効時は静止画を表示する。
 - T-038 の証跡は docs/reference/shots/t038-checks.json、t038-hero-*.png、t038-page-*.png、t038-lighthouse-final.json。320〜1440pxで横はみ出し0、Lighthouseモバイル性能92・アクセシビリティ100・CLS 0。
